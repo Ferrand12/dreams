@@ -2,8 +2,9 @@
 
 Before performing any task:
 
-1. Read `/ai/SYSTEM.md` — coding standards, role definition, principles
-2. Read `/ai/WORKFLOW.md` — shipping discipline, multi-session continuity, definition of done
+1. Read `/ai/BRAND.md` — **brand manual (law)**. All design, copy, and implementation decisions must comply.
+2. Read `/ai/SYSTEM.md` — coding standards, role definition, principles
+3. Read `/ai/WORKFLOW.md` — shipping discipline, multi-session continuity, definition of done
 
 Then pick your role:
 
@@ -21,7 +22,7 @@ All generated code must comply with this system.
 
 ## Project Overview
 
-Next.js 15 marketing & sales site for **Dreeeams** (web/mobile dev agency).
+Next.js 15 marketing & sales site for **Dreeeams** (modular technical partner / product studio).
 Bilingual (EN/ES) via `next-intl`. Deployed on Vercel. Assets served from Supabase CDN.
 
 **Tech stack:** Next.js 15 (App Router), TypeScript, Tailwind CSS, Framer Motion, next-intl, Cal.com embed, Upstash Redis, Resend, Twenty CRM.
