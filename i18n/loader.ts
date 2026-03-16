@@ -7,7 +7,8 @@ export type MessageNamespace =
   | 'pages/privacy'
   | 'pages/start'
   | 'pages/terms'
-  | 'pages/uiux-design';
+  | 'pages/uiux-design'
+  | 'pages/work';
 
 /**
  * Maps route patterns to the message namespaces that should be loaded.

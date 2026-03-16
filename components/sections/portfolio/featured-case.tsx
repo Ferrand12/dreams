@@ -2,7 +2,8 @@
 
 import { m } from 'framer-motion';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useTranslations, useLocale } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { fadeInUp, transitions } from '@/lib/motion-presets';
 import type { EnrichedProject } from '@/lib/portfolio';
@@ -377,6 +378,8 @@ function CaseCTA({
   isDark: boolean;
   t: ReturnType<typeof useTranslations>;
 }) {
+  const locale = useLocale();
+
   if (!cta) return null;
 
   if (cta.type === 'none') {
@@ -391,20 +394,29 @@ function CaseCTA({
   }
 
   const isExternal = cta.href.startsWith('http');
+  const linkClasses = cn(
+    'inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 border transition-all duration-200 w-fit',
+    isDark
+      ? 'text-white border-white/20 hover:bg-white hover:text-black'
+      : 'text-black border-black/20 hover:bg-black hover:text-white'
+  );
+
+  if (isExternal) {
+    return (
+      <a
+        href={cta.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={linkClasses}
+      >
+        {t(cta.labelKey)} →
+      </a>
+    );
+  }
 
   return (
-    <a
-      href={cta.href}
-      target={isExternal ? '_blank' : undefined}
-      rel={isExternal ? 'noopener noreferrer' : undefined}
-      className={cn(
-        'inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 border transition-all duration-200 w-fit',
-        isDark
-          ? 'text-white border-white/20 hover:bg-white hover:text-black'
-          : 'text-black border-black/20 hover:bg-black hover:text-white'
-      )}
-    >
+    <Link href={`/${locale}${cta.href}`} className={linkClasses}>
       {t(cta.labelKey)} →
-    </a>
+    </Link>
   );
 }

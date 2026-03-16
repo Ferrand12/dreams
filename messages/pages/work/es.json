@@ -1,0 +1,26 @@
+{
+  "caseStudy": {
+    "meta": {
+      "titleSuffix": "— Dreeeams",
+      "descriptionPrefix": "Caso de estudio:"
+    },
+    "sections": {
+      "challenge": "El Desafío",
+      "approach": "Nuestro Enfoque",
+      "outcome": "El Resultado",
+      "deliverables": "Lo Que Entregamos",
+      "gallery": "El Trabajo",
+      "proof": "Resultados"
+    },
+    "nav": {
+      "backToWork": "← Todo el Trabajo",
+      "nextProject": "Siguiente Proyecto",
+      "visitSite": "Visitar Sitio →"
+    },
+    "cta": {
+      "title": "¿Tienes un desafío similar?",
+      "subtitle": "Hablemos sobre lo que podemos construir juntos.",
+      "button": "Agendar una llamada"
+    }
+  }
+}

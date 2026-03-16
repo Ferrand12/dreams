@@ -35,6 +35,9 @@ export function resolveCTA(project: Project, state: ContentState): ProjectCTA | 
   }
 
   if (state === 'preview') {
+    if (project.detailPageSlug) {
+      return { type: 'caseStudy', labelKey: 'cta.viewCaseStudy', href: `/work/${project.detailPageSlug}` };
+    }
     if (project.liveUrl) {
       return { type: 'liveSite', labelKey: 'cta.visitSite', href: `https://${project.liveUrl}` };
     }
@@ -86,6 +89,40 @@ export function getFeaturedProjects(): EnrichedProject[] {
     .filter((p) => p.contentState !== 'internal');
 }
 
+// ── Single Project Lookup ──
+
+export function getProjectBySlug(slug: string): EnrichedProject | null {
+  const project = projects.find((p) => p.slug === slug || p.detailPageSlug === slug);
+  if (!project) return null;
+
+  const contentState = deriveContentState(project);
+  return {
+    ...project,
+    contentState,
+    cta: resolveCTA(project, contentState),
+    imageSrc: resolveImageSrc(project),
+  };
+}
+
+// ── Next Project Navigation ──
+
+export function getNextProject(currentSlug: string): EnrichedProject | null {
+  const featured = getFeaturedProjects();
+  const currentIndex = featured.findIndex((p) => p.slug === currentSlug);
+  if (currentIndex === -1) return null;
+
+  const nextIndex = (currentIndex + 1) % featured.length;
+  return featured[nextIndex];
+}
+
+// ── Static Params ──
+
+export function getAllProjectSlugs(): string[] {
+  return projects
+    .filter((p) => p.detailPageSlug)
+    .map((p) => p.detailPageSlug!);
+}
+
 // ── Project Registry ──
 // Current projects migrated to new type. Editorial assignments are defaults —
 // final roster, copy, and variant assignments are separate editorial decisions.
@@ -102,6 +139,7 @@ export const projects: Project[] = [
     bgTheme: 'dark',
     proofType: 'metrics',
     editorialStateOverride: 'published',
+    detailPageSlug: 'hunt-tickets',
     heroImage: 'hunt_mockup.png',
     impactLineKey: 'projects.huntTickets.impactLine',
     problemKey: 'projects.huntTickets.problem',
@@ -124,6 +162,7 @@ export const projects: Project[] = [
     bgTheme: 'light',
     proofType: 'metrics',
     editorialStateOverride: 'published',
+    detailPageSlug: 'perro-negro',
     impactLineKey: 'projects.perroNegro.impactLine',
     problemKey: 'projects.perroNegro.problem',
     solutionKey: 'projects.perroNegro.solution',
@@ -145,6 +184,7 @@ export const projects: Project[] = [
     bgTheme: 'dark',
     proofType: 'visual',
     editorialStateOverride: 'preview',
+    detailPageSlug: 'amazonas-toures',
     impactLineKey: 'projects.amazonasToures.impactLine',
     liveUrl: 'www.amazonas-toures.com',
   },

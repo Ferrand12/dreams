@@ -47,6 +47,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     'pages/start',
     'pages/terms',
     'pages/uiux-design',
+    'pages/work',
   ]);
 
   return {

@@ -1,0 +1,26 @@
+{
+  "caseStudy": {
+    "meta": {
+      "titleSuffix": "— Dreeeams",
+      "descriptionPrefix": "Case study:"
+    },
+    "sections": {
+      "challenge": "The Challenge",
+      "approach": "Our Approach",
+      "outcome": "The Outcome",
+      "deliverables": "What We Delivered",
+      "gallery": "The Work",
+      "proof": "Results"
+    },
+    "nav": {
+      "backToWork": "← All Work",
+      "nextProject": "Next Project",
+      "visitSite": "Visit Live Site →"
+    },
+    "cta": {
+      "title": "Have a similar challenge?",
+      "subtitle": "Let's talk about what we can build together.",
+      "button": "Book a Call"
+    }
+  }
+}
