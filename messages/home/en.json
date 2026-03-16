@@ -36,26 +36,25 @@
     }
   },
   "manifesto": {
-    "headlineFull": "We build modular digital systems that convert traffic into measurable results.",
-    "headlineBefore": "We build systems companies",
-    "headlineAfter": "on.",
-    "morphWords": ["grow", "scale", "operate", "rely"],
+    "badge": "Our Principles",
+    "title": "We don't build pages. We build systems.",
+    "subtitle": "Technology should simplify, not complicate. Design should convert, not just decorate.",
     "principles": [
       {
-        "title": "Systems over pages",
-        "description": "Websites, apps, and automation should work as a single system."
+        "title": "Design is strategy",
+        "description": "Visual quality is part of the product, not something added on top."
       },
       {
-        "title": "Execution over noise",
-        "description": "Good ideas are cheap. What matters is shipping and improving real products."
+        "title": "Execution over promises",
+        "description": "We ship working systems, not pitch decks. Results you can measure."
       },
       {
-        "title": "Clarity over complexity",
-        "description": "Modern technology should simplify how companies operate, not make it harder."
+        "title": "Built for the long run",
+        "description": "Every system is designed to scale with your business, not just to launch."
       },
       {
-        "title": "Long-term thinking",
-        "description": "We build digital foundations that companies can grow on for years."
+        "title": "Your team, not a vendor",
+        "description": "When you need to build right, you call us. That's the relationship we build."
       }
     ]
   },

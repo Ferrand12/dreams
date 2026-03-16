@@ -36,26 +36,25 @@
     }
   },
   "manifesto": {
-    "headlineFull": "Construimos sistemas digitales modulares que convierten tráfico en resultados medibles.",
-    "headlineBefore": "Construimos lo que las empresas necesitan para",
-    "headlineAfter": ".",
-    "morphWords": ["crecer", "escalar", "operar", "liderar"],
+    "badge": "Nuestros Principios",
+    "title": "No construimos páginas. Construimos sistemas.",
+    "subtitle": "La tecnología debe simplificar, no complicar. El diseño debe convertir, no solo decorar.",
     "principles": [
       {
-        "title": "Sistemas, no páginas",
-        "description": "Tu sitio, tu app y tus automatizaciones deben funcionar como un solo sistema."
+        "title": "El diseño es estrategia",
+        "description": "La calidad visual es parte del producto, no algo que se agrega encima."
       },
       {
-        "title": "Ejecución, no ruido",
-        "description": "Las ideas sobran. Lo que importa es lanzar productos reales y mejorarlos."
+        "title": "Ejecución sobre promesas",
+        "description": "Entregamos sistemas que funcionan, no presentaciones. Resultados que puedes medir."
       },
       {
-        "title": "Claridad, no complejidad",
-        "description": "La tecnología debe simplificar tu operación, no complicarla."
+        "title": "Construido para durar",
+        "description": "Cada sistema está diseñado para escalar con tu negocio, no solo para lanzar."
       },
       {
-        "title": "Visión a largo plazo",
-        "description": "Construimos bases digitales que duran años, no meses."
+        "title": "Tu equipo, no un proveedor",
+        "description": "Cuando necesitas construir bien, nos llamas. Esa es la relación que construimos."
       }
     ]
   },
