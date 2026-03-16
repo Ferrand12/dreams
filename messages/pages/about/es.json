@@ -1,0 +1,112 @@
+{
+  "about": {
+    "meta": {
+      "title": "Sobre nosotros — Dreeeams",
+      "description": "Estudio técnico de producto que construye sistemas digitales de los que dependen las empresas. Plataformas web, apps móviles, infraestructura backend y automatización."
+    },
+    "hero": {
+      "label": "Sobre nosotros",
+      "title": "Somos un estudio técnico de producto.",
+      "description": "Dreeeams construye sistemas digitales de los que dependen las empresas — plataformas web, apps móviles, infraestructura backend y automatización. Con base en Bogotá, trabajo global."
+    },
+    "stats": {
+      "items": [
+        { "value": "2023", "label": "Fundado" },
+        { "value": "40+", "label": "Proyectos entregados" },
+        { "value": "3–6m", "label": "Compromiso promedio" },
+        { "value": "92%", "label": "Retención de clientes" }
+      ]
+    },
+    "values": {
+      "label": "Lo que creemos",
+      "items": [
+        {
+          "word": "Claridad",
+          "description": "Definimos alcance antes de escribir código. Cada proyecto empieza con un objetivo claro, un cronograma definido y un presupuesto honesto."
+        },
+        {
+          "word": "Ejecución",
+          "description": "Las ideas no se entregan solas. Nuestro valor está en la construcción — sistemas confiables, probados y listos para producción, entregados a tiempo."
+        },
+        {
+          "word": "Sistemas",
+          "description": "No construimos páginas. Construimos arquitecturas que escalan, se integran y evolucionan con tu negocio."
+        },
+        {
+          "word": "Partnership",
+          "description": "No somos proveedores. Nos integramos con tu equipo, pensamos a largo plazo y respondemos después del lanzamiento."
+        },
+        {
+          "word": "Intención",
+          "description": "Cada decisión de diseño responde a un resultado de negocio. Nada decorativo sin propósito, ninguna feature sin estrategia."
+        },
+        {
+          "word": "Profundidad",
+          "description": "Next.js, React Native, Node, PostgreSQL, Redis, pipelines de IA. Dominamos el stack completo, de arriba a abajo."
+        }
+      ]
+    },
+    "process": {
+      "label": "Cómo trabajamos",
+      "title": "Proceso claro, cero ambigüedad.",
+      "steps": [
+        {
+          "number": "01",
+          "title": "Alcance",
+          "description": "Empezamos con una llamada. Definimos el problema, el objetivo y las restricciones. No proponemos hasta entender la construcción."
+        },
+        {
+          "number": "02",
+          "title": "Arquitectura",
+          "description": "Diseñamos el sistema antes de las pantallas. Modelos de datos, estructura de API, integraciones, estrategia de despliegue."
+        },
+        {
+          "number": "03",
+          "title": "Construcción",
+          "description": "Sprints iterativos con entregables claros. Ves progreso semanal, no mensual. Cada decisión queda documentada."
+        },
+        {
+          "number": "04",
+          "title": "Lanzamiento y evolución",
+          "description": "Desplegamos, monitoreamos e iteramos. La mayoría de clientes continúan con mejoras y nuevas funcionalidades."
+        }
+      ]
+    },
+    "capabilities": {
+      "label": "Qué construimos",
+      "title": "Full-stack, de principio a fin.",
+      "items": [
+        {
+          "title": "Plataformas web",
+          "description": "Sitios de marketing, plataformas de producto, dashboards y herramientas internas."
+        },
+        {
+          "title": "Apps móviles",
+          "description": "Cross-platform y nativas. React Native para velocidad, nativo para builds críticos en rendimiento."
+        },
+        {
+          "title": "Sistemas backend",
+          "description": "APIs, bases de datos, auth, infraestructura en tiempo real. Serverless y tradicional."
+        },
+        {
+          "title": "IA y automatización",
+          "description": "Integraciones con LLMs, pipelines de datos, flujos inteligentes y automatización de procesos."
+        },
+        {
+          "title": "Integraciones",
+          "description": "Sistemas de pago, CRMs, ERPs, APIs de terceros. Un solo sistema conectado."
+        },
+        {
+          "title": "Sistemas de diseño",
+          "description": "Librerías de componentes, tokens y guías de estilo que mantienen productos consistentes a escala."
+        }
+      ],
+      "stack": "Next.js · React Native · Node.js · PostgreSQL · Redis · TypeScript · Vercel · AWS"
+    },
+    "cta": {
+      "title": "¿Listo para construir?",
+      "description": "Cuéntanos en qué estás trabajando. Definimos alcance con honestidad.",
+      "button": "Agendar llamada"
+    }
+  }
+}

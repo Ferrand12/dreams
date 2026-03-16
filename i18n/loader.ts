@@ -3,6 +3,7 @@ import { Locale } from './config';
 export type MessageNamespace =
   | 'common'
   | 'home'
+  | 'pages/about'
   | 'pages/payments'
   | 'pages/privacy'
   | 'pages/start'
@@ -42,6 +43,11 @@ export const routeToNamespaces: Record<string, MessageNamespace[]> = {
   '/terms': ['common', 'pages/terms'],
   '/en/terms': ['common', 'pages/terms'],
   '/es/terminos': ['common', 'pages/terms'],
+
+  // About page
+  '/about': ['common', 'pages/about'],
+  '/en/about': ['common', 'pages/about'],
+  '/es/about': ['common', 'pages/about'],
 
   // Start / Fit Check page
   '/start': ['common', 'pages/start'],

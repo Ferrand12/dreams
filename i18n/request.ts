@@ -42,6 +42,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const messages = await loadMessages(locale as 'en' | 'es', [
     'common',
     'home',
+    'pages/about',
     'pages/payments',
     'pages/privacy',
     'pages/start',

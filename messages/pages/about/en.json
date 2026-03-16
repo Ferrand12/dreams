@@ -1,0 +1,112 @@
+{
+  "about": {
+    "meta": {
+      "title": "About — Dreeeams",
+      "description": "Technical product studio building digital systems that companies rely on. Web platforms, mobile apps, backend infrastructure, and automation."
+    },
+    "hero": {
+      "label": "About",
+      "title": "We're a technical product studio.",
+      "description": "Dreeeams builds digital systems that companies rely on — web platforms, mobile apps, backend infrastructure, and automation. Based in Bogotá, working globally."
+    },
+    "stats": {
+      "items": [
+        { "value": "2023", "label": "Founded" },
+        { "value": "40+", "label": "Projects shipped" },
+        { "value": "3–6mo", "label": "Avg. engagement" },
+        { "value": "92%", "label": "Client retention" }
+      ]
+    },
+    "values": {
+      "label": "What we believe",
+      "items": [
+        {
+          "word": "Clarity",
+          "description": "We define scope before we write code. Every project starts with a clear objective, a defined timeline, and an honest budget."
+        },
+        {
+          "word": "Execution",
+          "description": "Ideas don't ship themselves. Our value is in the build — reliable, tested, production-grade systems delivered on time."
+        },
+        {
+          "word": "Systems",
+          "description": "We don't build pages. We build architectures that scale, integrate, and evolve with your business."
+        },
+        {
+          "word": "Partnership",
+          "description": "We're not vendors. We embed with your team, think long-term, and stay accountable after launch."
+        },
+        {
+          "word": "Intent",
+          "description": "Every design decision maps to a business outcome. No decoration without purpose, no features without strategy."
+        },
+        {
+          "word": "Depth",
+          "description": "Next.js, React Native, Node, PostgreSQL, Redis, AI pipelines. We own the full stack, top to bottom."
+        }
+      ]
+    },
+    "process": {
+      "label": "How we work",
+      "title": "Clear process, zero ambiguity.",
+      "steps": [
+        {
+          "number": "01",
+          "title": "Scope",
+          "description": "We start with a call. Define the problem, the goal, and the constraints. No proposal until we understand the build."
+        },
+        {
+          "number": "02",
+          "title": "Architecture",
+          "description": "We design the system before the screens. Data models, API structure, integrations, deployment strategy."
+        },
+        {
+          "number": "03",
+          "title": "Build",
+          "description": "Iterative sprints with clear deliverables. You see progress weekly, not monthly. Every decision documented."
+        },
+        {
+          "number": "04",
+          "title": "Launch & evolve",
+          "description": "We deploy, monitor, and iterate. Most clients continue with us for ongoing improvements and new features."
+        }
+      ]
+    },
+    "capabilities": {
+      "label": "What we build",
+      "title": "Full-stack, end to end.",
+      "items": [
+        {
+          "title": "Web platforms",
+          "description": "Marketing sites, product platforms, dashboards, and internal tools."
+        },
+        {
+          "title": "Mobile apps",
+          "description": "Cross-platform and native. React Native for speed, native for performance-critical builds."
+        },
+        {
+          "title": "Backend systems",
+          "description": "APIs, databases, auth, real-time infrastructure. Serverless and traditional."
+        },
+        {
+          "title": "AI & automation",
+          "description": "LLM integrations, data pipelines, intelligent workflows, and process automation."
+        },
+        {
+          "title": "Integrations",
+          "description": "Payment systems, CRMs, ERPs, third-party APIs. One connected system."
+        },
+        {
+          "title": "Design systems",
+          "description": "Component libraries, tokens, and style guides that keep products consistent at scale."
+        }
+      ],
+      "stack": "Next.js · React Native · Node.js · PostgreSQL · Redis · TypeScript · Vercel · AWS"
+    },
+    "cta": {
+      "title": "Ready to build?",
+      "description": "Tell us what you're working on. We'll scope it honestly.",
+      "button": "Book a call"
+    }
+  }
+}
