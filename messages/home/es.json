@@ -36,6 +36,7 @@
     }
   },
   "manifesto": {
+    "headlineFull": "Construimos sistemas digitales modulares que convierten tráfico en resultados medibles.",
     "headlineBefore": "Construimos lo que las empresas necesitan para",
     "headlineAfter": ".",
     "morphWords": ["crecer", "escalar", "operar", "liderar"],
@@ -378,7 +379,10 @@
       "appStore": "App Store",
       "reviews": "reseñas",
       "downloads": "descargas",
-      "ticketsSold": "tickets vendidos"
+      "ticketsSold": "tickets vendidos",
+      "problem": "Problema",
+      "solution": "Solución",
+      "result": "Resultado"
     },
     "projects": {
       "huntRho": {
@@ -386,6 +390,9 @@
       },
       "perroNegro": {
         "description": "Sistema de boletería para el venue más grande de Bogotá. 90K visitantes únicos, 105K visitas, inventario en tiempo real.",
+        "problem": "El venue más grande de Bogotá no tenía boletería digital. Todo se vendía en efectivo, sin datos.",
+        "solution": "Plataforma web con inventario en tiempo real, pagos seguros y analítica de eventos.",
+        "result": "90K visitantes únicos. 105K visitas totales. Operación 100% digital.",
         "metrics": {
           "visitors": "90.000+",
           "visitorsLabel": "Visitantes únicos",
@@ -403,7 +410,22 @@
         "description": "Plataforma de pagos y transacciones con procesamiento seguro y flujos simplificados."
       },
       "huntTickets": {
-        "description": "App de boletería para eventos. 30K+ tickets procesados, 4.3★ en App Store, 5K+ descargas en el primer año."
+        "description": "App de boletería para eventos. 30K+ tickets procesados, 4.3★ en App Store, 5K+ descargas en el primer año.",
+        "problem": "Los eventos en Colombia no tenían boletería móvil confiable. Todo se pagaba en efectivo o transferencia.",
+        "solution": "App nativa con inventario en tiempo real, validación QR y procesamiento de pagos integrado.",
+        "result": "30K+ tickets vendidos, 4.3★, 5K+ descargas en el primer año."
+      },
+      "startupMvp": {
+        "description": "MVP SaaS para una startup de gestión de personal. De cero a producción en 6 semanas.",
+        "problem": "Los founders necesitaban validar su idea antes de levantar capital, sin equipo técnico.",
+        "solution": "MVP full-stack con auth, dashboards y facturación Stripe. Next.js + Supabase.",
+        "result": "Lanzado en 6 semanas. Levantaron ronda semilla con producto funcional."
+      },
+      "ecommerceLanding": {
+        "description": "Sistema de landing enfocado en conversión para una marca DTC. 3x en captura de leads.",
+        "problem": "Una marca DTC enviaba tráfico pago a una página genérica de Shopify. Baja conversión, sin medición.",
+        "solution": "Landing system modular con secciones configurables, A/B testing y analítica completa.",
+        "result": "3x en tasa de captura. 40% menos en costo por adquisición."
       }
     }
   },
@@ -463,7 +485,7 @@
       },
       "q2": {
         "question": "¿Cuál es el presupuesto típico de un proyecto?",
-        "answer": "La mayoría de proyectos inician desde $2.500.000 COP y suben según la complejidad, integraciones y alcance.\nLos proyectos web más enfocados suelen estar en el rango menor. Apps móviles, sistemas backend y proyectos de IA/automatización tienden a requerir presupuestos mayores.\nDefinimos el alcance correcto primero y luego recomendamos el rango de presupuesto más adecuado."
+        "answer": "Depende del tipo de proyecto.\nSoluciones rápidas y puntuales — como un landing o una integración específica — están en el rango menor. Productos completos, apps móviles y sistemas de IA/automatización requieren más inversión.\nDefinimos alcance primero y luego recomendamos el presupuesto adecuado. Sin sorpresas."
       },
       "q3": {
         "question": "¿Cuánto tiempo toma un proyecto normalmente?",

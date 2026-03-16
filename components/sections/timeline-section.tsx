@@ -105,11 +105,11 @@ export default function TimelineSection() {
               return (
                 <m.div
                   key={year}
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 8 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="border-t border-black/10 lg:border-t-0 pt-8 pb-10 pr-8"
+                  transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: index * 0.08 }}
+                  className="border-t border-black/10 lg:border-t-0 lg:aspect-square flex flex-col p-6 md:p-8"
                 >
                   <span
                     className="block text-sm font-mono tracking-wider mb-4 transition-all duration-500"
@@ -127,7 +127,7 @@ export default function TimelineSection() {
                     {t(`items.${year}.phase`)}
                   </h3>
                   <p
-                    className="text-sm leading-relaxed max-w-xs transition-all duration-500"
+                    className="text-sm leading-relaxed transition-all duration-500 mt-auto"
                     style={{ color: isActive ? 'rgba(0,0,0,0.7)' : 'rgba(0,0,0,0.4)' }}
                   >
                     {t(`items.${year}.description`)}

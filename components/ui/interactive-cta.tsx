@@ -83,7 +83,7 @@ export function InteractiveCTA({
         transition: {
           type: "spring",
           stiffness: 20 + (1 - proximity) * 30,
-          damping: 12,
+          damping: 18,
           delay: proximity * 0.15,
         },
       };
@@ -122,8 +122,8 @@ export function InteractiveCTA({
         scale: 0.5,
         transition: {
           type: "spring",
-          stiffness: 100,
-          damping: 8,
+          stiffness: 80,
+          damping: 14,
         },
       };
     });

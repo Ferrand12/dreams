@@ -73,20 +73,18 @@ const projects: Project[] = [
     mockupUrl: 'https://eeyjhkhrdoouapuilwep.supabase.co/storage/v1/object/public/content/mockup_mha.png',
   },
   {
-    titleKey: 'HUNT RHO',
+    titleKey: 'STARTUP MVP',
     categoryKey: 'webApp',
-    descriptionKey: 'huntRho',
-    tags: ['Next.js', 'TypeScript', 'Vercel'],
-    color: 'bg-brand',
-    url: 'hunt-rho.vercel.app',
+    descriptionKey: 'startupMvp',
+    tags: ['Next.js', 'Supabase', 'Stripe'],
+    color: 'bg-black',
   },
   {
-    titleKey: 'KUENTA',
+    titleKey: 'DTC LANDING SYSTEM',
     categoryKey: 'webApp',
-    descriptionKey: 'kuenta',
-    tags: ['Next.js', 'TypeScript', 'Vercel'],
-    color: 'bg-gradient-to-br from-purple-600 to-pink-600',
-    url: 'paga-dreamstudio.vercel.app',
+    descriptionKey: 'ecommerceLanding',
+    tags: ['Next.js', 'Tailwind', 'Analytics'],
+    color: 'bg-white',
   },
 ];
 
@@ -119,14 +117,7 @@ export default function PortfolioSection() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects
-            .filter((project) => {
-              if (process.env.NODE_ENV === 'production') {
-                return project.titleKey !== 'HUNT RHO' && project.titleKey !== 'KUENTA';
-              }
-              return true;
-            })
-            .map((project, index) => (
+          {projects.map((project, index) => (
               <ProjectCard
                 key={project.titleKey}
                 project={project}

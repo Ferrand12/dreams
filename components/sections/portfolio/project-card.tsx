@@ -82,6 +82,15 @@ export default function ProjectCard({ project, index, tButtons, tLabels, tProjec
     });
   }
 
+  // Check if project has case study data (problem/solution/result)
+  let hasCaseStudy = false;
+  try {
+    tProjects(`${project.descriptionKey}.problem`);
+    hasCaseStudy = true;
+  } catch {
+    hasCaseStudy = false;
+  }
+
   const handleCardClick = () => {
     setIsActive((prev) => !prev);
   };
@@ -179,9 +188,26 @@ export default function ProjectCard({ project, index, tButtons, tLabels, tProjec
                   {project.titleKey}
                 </h3>
 
-                <p className="text-sm leading-relaxed text-white/70 max-w-md">
-                  {tProjects(`${project.descriptionKey}.description`)}
-                </p>
+                {hasCaseStudy ? (
+                  <div className="space-y-3">
+                    <div>
+                      <span className="text-xs font-mono text-white/40 tracking-wider uppercase">{tLabels('problem')}</span>
+                      <p className="text-sm leading-relaxed text-white/70 mt-1">{tProjects(`${project.descriptionKey}.problem`)}</p>
+                    </div>
+                    <div>
+                      <span className="text-xs font-mono text-white/40 tracking-wider uppercase">{tLabels('solution')}</span>
+                      <p className="text-sm leading-relaxed text-white/70 mt-1">{tProjects(`${project.descriptionKey}.solution`)}</p>
+                    </div>
+                    <div>
+                      <span className="text-xs font-mono text-white/40 tracking-wider uppercase">{tLabels('result')}</span>
+                      <p className="text-sm leading-relaxed text-white/70 mt-1">{tProjects(`${project.descriptionKey}.result`)}</p>
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-sm leading-relaxed text-white/70 max-w-md">
+                    {tProjects(`${project.descriptionKey}.description`)}
+                  </p>
+                )}
 
                 {projectMetrics.length > 0 && (
                   <div className="flex flex-wrap gap-x-6 gap-y-2 pt-3 border-t border-white/10">
@@ -230,9 +256,26 @@ export default function ProjectCard({ project, index, tButtons, tLabels, tProjec
 
         {/* Mobile: description + metrics + link (always visible on touch devices) */}
         <div className="md:hidden space-y-3">
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            {tProjects(`${project.descriptionKey}.description`)}
-          </p>
+          {hasCaseStudy ? (
+            <div className="space-y-2">
+              <div>
+                <span className="text-xs font-mono text-muted-foreground/60 tracking-wider uppercase">{tLabels('problem')}</span>
+                <p className="text-sm text-muted-foreground leading-relaxed mt-0.5">{tProjects(`${project.descriptionKey}.problem`)}</p>
+              </div>
+              <div>
+                <span className="text-xs font-mono text-muted-foreground/60 tracking-wider uppercase">{tLabels('solution')}</span>
+                <p className="text-sm text-muted-foreground leading-relaxed mt-0.5">{tProjects(`${project.descriptionKey}.solution`)}</p>
+              </div>
+              <div>
+                <span className="text-xs font-mono text-muted-foreground/60 tracking-wider uppercase">{tLabels('result')}</span>
+                <p className="text-sm text-muted-foreground leading-relaxed mt-0.5">{tProjects(`${project.descriptionKey}.result`)}</p>
+              </div>
+            </div>
+          ) : (
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              {tProjects(`${project.descriptionKey}.description`)}
+            </p>
+          )}
 
           {projectMetrics.length > 0 && (
             <div className="flex flex-wrap gap-x-4 gap-y-1">

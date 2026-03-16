@@ -36,6 +36,7 @@
     }
   },
   "manifesto": {
+    "headlineFull": "We build modular digital systems that convert traffic into measurable results.",
     "headlineBefore": "We build systems companies",
     "headlineAfter": "on.",
     "morphWords": ["grow", "scale", "operate", "rely"],
@@ -378,7 +379,10 @@
       "appStore": "App Store",
       "reviews": "reviews",
       "downloads": "downloads",
-      "ticketsSold": "tickets sold"
+      "ticketsSold": "tickets sold",
+      "problem": "Problem",
+      "solution": "Solution",
+      "result": "Result"
     },
     "projects": {
       "huntRho": {
@@ -386,6 +390,9 @@
       },
       "perroNegro": {
         "description": "Ticketing platform for Bogotá's largest venue. 90K unique visitors, 105K platform visits, real-time inventory.",
+        "problem": "Bogotá's largest venue had no digital ticketing. All sales were manual, with no data.",
+        "solution": "Custom web platform with real-time inventory, secure payments, and event analytics.",
+        "result": "90K unique visitors. 105K total visits. Fully digital operation.",
         "metrics": {
           "visitors": "90,000+",
           "visitorsLabel": "Unique Visitors",
@@ -403,7 +410,22 @@
         "description": "Payment and transaction platform with secure processing and streamlined user flows."
       },
       "huntTickets": {
-        "description": "Event ticketing app. 30K+ tickets processed, 4.3★ App Store rating, 5K+ downloads in first year."
+        "description": "Event ticketing app. 30K+ tickets processed, 4.3★ App Store rating, 5K+ downloads in first year.",
+        "problem": "Events in Colombia had no reliable mobile ticketing. Buyers used cash or bank transfers.",
+        "solution": "Native app with real-time inventory, QR validation, and integrated payment processing.",
+        "result": "30K+ tickets sold, 4.3★ rating, 5K+ downloads in year one."
+      },
+      "startupMvp": {
+        "description": "SaaS MVP for a workforce management startup. Shipped in 6 weeks from zero to production.",
+        "problem": "Founders needed to validate their idea before raising, with no technical team.",
+        "solution": "Full-stack MVP with auth, dashboards, and Stripe billing. Built on Next.js + Supabase.",
+        "result": "Launched in 6 weeks. Secured seed round based on working product."
+      },
+      "ecommerceLanding": {
+        "description": "Conversion-focused landing system for a DTC brand. 3x lead capture vs. previous site.",
+        "problem": "A DTC brand was driving paid traffic to a generic Shopify page. Low conversion, no measurement.",
+        "solution": "Custom landing system with modular sections, A/B testing, and full analytics integration.",
+        "result": "3x lead capture rate. 40% lower cost per acquisition."
       }
     }
   },
@@ -463,7 +485,7 @@
       },
       "q2": {
         "question": "What is the typical project budget?",
-        "answer": "Most projects start around $2,000 USD and go up depending on complexity, integrations, and scope.\nSmaller website engagements usually sit at the lower end. Mobile apps, backend systems, and AI/automation projects tend to require larger budgets.\nWe define the right scope first, then recommend the most sensible budget range."
+        "answer": "It depends on the type of build.\nQuick, targeted solutions — like a landing page or a specific integration — are on the lighter end. Full product builds, mobile apps, and AI/automation systems require more investment.\nWe define scope first, then recommend the right budget range. No surprises."
       },
       "q3": {
         "question": "How long does a project usually take?",
