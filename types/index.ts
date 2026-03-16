@@ -103,16 +103,68 @@ export interface NavItem {
   href: string;
 }
 
-// Portfolio Types
-export interface PortfolioProject {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  technologies: string[];
-  link?: string;
-  category: string;
-}
+// Portfolio System Types
+export type ProjectCategory =
+  | 'webPlatform'
+  | 'mobileApp'
+  | 'tourismPlatform'
+  | 'saasProduct'
+  | 'ecommerce'
+  | 'brandSite';
+
+export type TeaserVariant = 'hero' | 'standard' | 'minimal';
+export type BgTheme = 'dark' | 'light';
+export type ContentState = 'internal' | 'coming-soon' | 'preview' | 'published';
+export type ProofType = 'metrics' | 'visual' | 'narrative' | 'hybrid';
+export type CTAType = 'caseStudy' | 'liveSite' | 'project' | 'none';
+
+export type ProjectMetric = {
+  value: string;
+  labelKey: string;
+};
+
+export type ProjectCTA = {
+  type: CTAType;
+  labelKey: string;
+  href: string;
+};
+
+export type Project = {
+  // Identity (always required)
+  slug: string;
+  titleKey: string;
+  categoryKey: ProjectCategory;
+  tags: string[];
+
+  // Editorial decisions (set by human, not derived)
+  featured: boolean;
+  teaserVariant?: TeaserVariant;
+  order?: number;
+  bgTheme?: BgTheme;
+  proofType?: ProofType;
+  editorialStateOverride?: ContentState;
+  ctaOverride?: ProjectCTA;
+
+  // Visual (progressive — add as assets become available)
+  heroImage?: string;
+  placeholderImage?: string;
+  mockupUrl?: string;
+  galleryImages?: string[];
+
+  // Content (progressive — defines auto-derived state)
+  impactLineKey?: string;
+  metrics?: ProjectMetric[];
+
+  // Narrative (detail page depth)
+  problemKey?: string;
+  solutionKey?: string;
+  resultKey?: string;
+  deliverables?: string[];
+
+  // Links
+  liveUrl?: string;
+  detailPageSlug?: string;
+};
 
 // Service Types
 export interface Service {

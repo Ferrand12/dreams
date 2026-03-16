@@ -351,8 +351,34 @@
     }
   },
   "portfolio": {
+    "eyebrow": "Trabajo seleccionado",
     "title": "Lo que hemos construido",
     "subtitle": "Productos lanzados. Resultados medidos.",
+    "categories": {
+      "webPlatform": "PLATAFORMA WEB",
+      "mobileApp": "APP MÓVIL",
+      "tourismPlatform": "PLATAFORMA DE TURISMO",
+      "saasProduct": "PRODUCTO SAAS",
+      "ecommerce": "E-COMMERCE",
+      "brandSite": "SITIO DE MARCA"
+    },
+    "cta": {
+      "viewCaseStudy": "Ver caso de estudio",
+      "visitSite": "Visitar sitio",
+      "preview": "Vista previa",
+      "comingSoon": "Próximamente"
+    },
+    "states": {
+      "comingSoon": "Próximamente",
+      "preview": "Vista previa"
+    },
+    "metrics": {
+      "uniqueVisitors": "visitantes únicos",
+      "totalVisits": "visitas totales",
+      "ticketsSold": "tickets vendidos",
+      "appRating": "rating en App Store",
+      "downloads": "descargas"
+    },
     "buttons": {
       "viewProject": "VER PROYECTO",
       "viewAllProjects": "VER TODOS LOS PROYECTOS",
@@ -389,6 +415,7 @@
       },
       "perroNegro": {
         "description": "Sistema de boletería para el venue más grande de Bogotá. 90K visitantes únicos, 105K visitas, inventario en tiempo real.",
+        "impactLine": "El venue más grande de Bogotá, 100% digital. 90K visitantes en el primer año.",
         "problem": "El venue más grande de Bogotá no tenía boletería digital. Todo se vendía en efectivo, sin datos.",
         "solution": "Plataforma web con inventario en tiempo real, pagos seguros y analítica de eventos.",
         "result": "90K visitantes únicos. 105K visitas totales. Operación 100% digital.",
@@ -400,28 +427,33 @@
         }
       },
       "mariaHelena": {
-        "description": "Gestión de eventos para María Helena Amador. Sistema de reservas con diseño mobile-first."
+        "description": "Gestión de eventos para María Helena Amador. Sistema de reservas con diseño mobile-first.",
+        "impactLine": "Plataforma de gestión de eventos. Reservas mobile-first."
       },
       "amazonasToures": {
-        "description": "Plataforma de turismo para expediciones al Amazonas. Reservas en línea, multi-idioma, SEO optimizado."
+        "description": "Plataforma de turismo para expediciones al Amazonas. Reservas en línea, multi-idioma, SEO optimizado.",
+        "impactLine": "Motor de reservas para expediciones al Amazonas. Multi-idioma, SEO optimizado."
       },
       "kuenta": {
         "description": "Plataforma de pagos y transacciones con procesamiento seguro y flujos simplificados."
       },
       "huntTickets": {
         "description": "App de boletería para eventos. 30K+ tickets procesados, 4.3★ en App Store, 5K+ descargas en el primer año.",
+        "impactLine": "Boletería móvil para la industria de eventos en Colombia. 30K+ tickets en el primer año.",
         "problem": "Los eventos en Colombia no tenían boletería móvil confiable. Todo se pagaba en efectivo o transferencia.",
         "solution": "App nativa con inventario en tiempo real, validación QR y procesamiento de pagos integrado.",
         "result": "30K+ tickets vendidos, 4.3★, 5K+ descargas en el primer año."
       },
       "startupMvp": {
         "description": "MVP SaaS para una startup de gestión de personal. De cero a producción en 6 semanas.",
+        "impactLine": "MVP SaaS lanzado en 6 semanas. Ronda semilla con producto funcional.",
         "problem": "Los founders necesitaban validar su idea antes de levantar capital, sin equipo técnico.",
         "solution": "MVP full-stack con auth, dashboards y facturación Stripe. Next.js + Supabase.",
         "result": "Lanzado en 6 semanas. Levantaron ronda semilla con producto funcional."
       },
       "ecommerceLanding": {
         "description": "Sistema de landing enfocado en conversión para una marca DTC. 3x en captura de leads.",
+        "impactLine": "Sistema de landing para marca DTC. 3x en tasa de captura.",
         "problem": "Una marca DTC enviaba tráfico pago a una página genérica de Shopify. Baja conversión, sin medición.",
         "solution": "Landing system modular con secciones configurables, A/B testing y analítica completa.",
         "result": "3x en tasa de captura. 40% menos en costo por adquisición."

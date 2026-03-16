@@ -2,100 +2,21 @@
 
 import { m } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import ProjectCard from '@/components/sections/portfolio/project-card';
-
-type Project = {
-  titleKey: string;
-  categoryKey: 'webApp' | 'mobileApp';
-  descriptionKey: string;
-  tags: string[];
-  color: string;
-  url?: string;
-  mobileView?: boolean;
-  isMockup?: boolean;
-  mockupUrl?: string;
-  isIcon?: boolean;
-  rating?: {
-    stars: number;
-    reviews: number;
-  };
-  appStore?: boolean;
-  downloads?: number;
-  ticketsSold?: number;
-  metrics?: {
-    visitors?: string;
-    visits?: string;
-  };
-};
-
-const projects: Project[] = [
-  {
-    titleKey: 'HUNT TICKETS',
-    categoryKey: 'mobileApp',
-    descriptionKey: 'huntTickets',
-    tags: ['React Native', 'TypeScript', 'Firebase'],
-    color: 'bg-white',
-    isMockup: true,
-    rating: { stars: 4.3, reviews: 250 },
-    appStore: true,
-    downloads: 5000,
-    ticketsSold: 30000,
-  },
-  {
-    titleKey: 'PERRO NEGRO',
-    categoryKey: 'webApp',
-    descriptionKey: 'perroNegro',
-    tags: ['Next.js', 'Stripe', 'PostgreSQL'],
-    color: 'bg-black',
-    url: 'perronegro.biotickets.com',
-    metrics: {
-      visitors: 'visitors',
-      visits: 'visits',
-    },
-  },
-  {
-    titleKey: 'AMAZONAS TOURES',
-    categoryKey: 'webApp',
-    descriptionKey: 'amazonasToures',
-    tags: ['Next.js', 'Tailwind', 'Supabase'],
-    color: 'bg-white',
-    url: 'www.amazonas-toures.com',
-  },
-  {
-    titleKey: 'MARÍA HELENA AMADOR',
-    categoryKey: 'webApp',
-    descriptionKey: 'mariaHelena',
-    tags: ['Next.js', 'Stripe', 'PostgreSQL'],
-    color: 'bg-black',
-    url: 'maria-helena-amador.hunt-tickets.com',
-    mobileView: true,
-    isMockup: true,
-    mockupUrl: 'https://eeyjhkhrdoouapuilwep.supabase.co/storage/v1/object/public/content/mockup_mha.png',
-  },
-  {
-    titleKey: 'STARTUP MVP',
-    categoryKey: 'webApp',
-    descriptionKey: 'startupMvp',
-    tags: ['Next.js', 'Supabase', 'Stripe'],
-    color: 'bg-black',
-  },
-  {
-    titleKey: 'DTC LANDING SYSTEM',
-    categoryKey: 'webApp',
-    descriptionKey: 'ecommerceLanding',
-    tags: ['Next.js', 'Tailwind', 'Analytics'],
-    color: 'bg-white',
-  },
-];
+import { getFeaturedProjects } from '@/lib/portfolio';
+import { FeaturedCase } from '@/components/sections/portfolio/featured-case';
 
 export default function PortfolioSection() {
   const t = useTranslations('portfolio');
-  const tButtons = useTranslations('portfolio.buttons');
-  const tLabels = useTranslations('portfolio.labels');
-  const tProjects = useTranslations('portfolio.projects');
+  const projects = getFeaturedProjects();
+
+  const heroProjects = projects.filter((p) => p.teaserVariant === 'hero');
+  const standardProjects = projects.filter((p) => p.teaserVariant === 'standard');
+  const minimalProjects = projects.filter(
+    (p) => p.teaserVariant === 'minimal' || !p.teaserVariant
+  );
 
   return (
-    <section id="work" className="relative z-10 py-24 px-6 md:px-12 bg-white">
+    <section id="work" className="relative z-10 py-24 md:py-32 px-6 md:px-12 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <m.div
@@ -103,31 +24,48 @@ export default function PortfolioSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-16"
+          className="mb-16 md:mb-20"
         >
-          <div className="flex items-center justify-center mb-8">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-nostalgic text-center" style={{ letterSpacing: '-0.04em' }}>
-              {t('title')}
-            </h2>
-          </div>
-          <p className="text-center text-sm max-w-2xl mx-auto">
+          <span className="text-xs font-mono tracking-widest uppercase text-muted-foreground mb-4 block">
+            {t('eyebrow')}
+          </span>
+          <h2
+            className="text-4xl sm:text-5xl md:text-6xl font-nostalgic max-w-3xl leading-tight tracking-tight"
+            style={{ letterSpacing: '-0.04em' }}
+          >
+            {t('title')}
+          </h2>
+          <p className="text-sm md:text-base text-muted-foreground mt-4 max-w-xl">
             {t('subtitle')}
           </p>
         </m.div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-              <ProjectCard
-                key={project.titleKey}
-                project={project}
-                index={index}
-                tButtons={tButtons}
-                tLabels={tLabels}
-                tProjects={tProjects}
-              />
+        {/* Hero blocks — full width, generous spacing */}
+        {heroProjects.length > 0 && (
+          <div className="space-y-16 mb-12">
+            {heroProjects.map((project, i) => (
+              <FeaturedCase key={project.slug} project={project} index={i} />
             ))}
-        </div>
+          </div>
+        )}
+
+        {/* Standard grid — 2 columns */}
+        {standardProjects.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            {standardProjects.map((project, i) => (
+              <FeaturedCase key={project.slug} project={project} index={i} />
+            ))}
+          </div>
+        )}
+
+        {/* Minimal list — compact rows */}
+        {minimalProjects.length > 0 && (
+          <div className="space-y-4">
+            {minimalProjects.map((project, i) => (
+              <FeaturedCase key={project.slug} project={project} index={i} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

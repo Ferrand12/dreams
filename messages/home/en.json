@@ -351,8 +351,34 @@
     }
   },
   "portfolio": {
+    "eyebrow": "Selected Work",
     "title": "Our Work",
     "subtitle": "Products we've shipped. Results we've measured.",
+    "categories": {
+      "webPlatform": "WEB PLATFORM",
+      "mobileApp": "MOBILE APP",
+      "tourismPlatform": "TOURISM PLATFORM",
+      "saasProduct": "SAAS PRODUCT",
+      "ecommerce": "E-COMMERCE",
+      "brandSite": "BRAND SITE"
+    },
+    "cta": {
+      "viewCaseStudy": "View case study",
+      "visitSite": "Visit live site",
+      "preview": "Preview",
+      "comingSoon": "Coming soon"
+    },
+    "states": {
+      "comingSoon": "Coming soon",
+      "preview": "Preview"
+    },
+    "metrics": {
+      "uniqueVisitors": "unique visitors",
+      "totalVisits": "total visits",
+      "ticketsSold": "tickets sold",
+      "appRating": "App Store rating",
+      "downloads": "downloads"
+    },
     "buttons": {
       "viewProject": "VIEW PROJECT",
       "viewAllProjects": "VIEW ALL PROJECTS",
@@ -389,6 +415,7 @@
       },
       "perroNegro": {
         "description": "Ticketing platform for Bogotá's largest venue. 90K unique visitors, 105K platform visits, real-time inventory.",
+        "impactLine": "Bogotá's largest venue, fully digital. 90K visitors in the first year.",
         "problem": "Bogotá's largest venue had no digital ticketing. All sales were manual, with no data.",
         "solution": "Custom web platform with real-time inventory, secure payments, and event analytics.",
         "result": "90K unique visitors. 105K total visits. Fully digital operation.",
@@ -400,28 +427,33 @@
         }
       },
       "mariaHelena": {
-        "description": "Event management for María Helena Amador. Booking experience, mobile-first design."
+        "description": "Event management for María Helena Amador. Booking experience, mobile-first design.",
+        "impactLine": "Event management platform. Mobile-first booking experience."
       },
       "amazonasToures": {
-        "description": "Tourism platform for Amazon river expeditions. Booking engine, multi-language, SEO-optimized."
+        "description": "Tourism platform for Amazon river expeditions. Booking engine, multi-language, SEO-optimized.",
+        "impactLine": "Booking engine for Amazon river expeditions. Multi-language, SEO-optimized."
       },
       "kuenta": {
         "description": "Payment and transaction platform with secure processing and streamlined user flows."
       },
       "huntTickets": {
         "description": "Event ticketing app. 30K+ tickets processed, 4.3★ App Store rating, 5K+ downloads in first year.",
+        "impactLine": "Mobile ticketing for Colombia's event industry. 30K+ tickets in year one.",
         "problem": "Events in Colombia had no reliable mobile ticketing. Buyers used cash or bank transfers.",
         "solution": "Native app with real-time inventory, QR validation, and integrated payment processing.",
         "result": "30K+ tickets sold, 4.3★ rating, 5K+ downloads in year one."
       },
       "startupMvp": {
         "description": "SaaS MVP for a workforce management startup. Shipped in 6 weeks from zero to production.",
+        "impactLine": "SaaS MVP shipped in 6 weeks. Secured seed round with working product.",
         "problem": "Founders needed to validate their idea before raising, with no technical team.",
         "solution": "Full-stack MVP with auth, dashboards, and Stripe billing. Built on Next.js + Supabase.",
         "result": "Launched in 6 weeks. Secured seed round based on working product."
       },
       "ecommerceLanding": {
         "description": "Conversion-focused landing system for a DTC brand. 3x lead capture vs. previous site.",
+        "impactLine": "Landing system for a DTC brand. 3x lead capture rate.",
         "problem": "A DTC brand was driving paid traffic to a generic Shopify page. Low conversion, no measurement.",
         "solution": "Custom landing system with modular sections, A/B testing, and full analytics integration.",
         "result": "3x lead capture rate. 40% lower cost per acquisition."

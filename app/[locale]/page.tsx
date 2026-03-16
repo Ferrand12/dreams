@@ -13,12 +13,15 @@ const ServicesSection = dynamic(() => import('@/components/sections/services-sec
 });
 const PortfolioSection = dynamic(() => import('@/components/sections/portfolio-section'), {
   loading: () => (
-    <div className="py-24 px-6 md:px-12 bg-white">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-        <SkeletonProjectCard />
-        <SkeletonProjectCard />
-        <SkeletonProjectCard />
-        <SkeletonProjectCard />
+    <div className="py-24 md:py-32 px-6 md:px-12 bg-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="h-8 w-32 bg-gray-100 animate-pulse mb-4" />
+        <div className="h-14 w-80 bg-gray-100 animate-pulse mb-16" />
+        <div className="h-64 md:h-80 bg-gray-100 animate-pulse mb-12" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <SkeletonProjectCard />
+          <SkeletonProjectCard />
+        </div>
       </div>
     </div>
   ),
