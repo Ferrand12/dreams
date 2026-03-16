@@ -1,87 +1,70 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { m } from 'framer-motion';
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { cdnAssetUrl } from '@/lib/constants';
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import Logo from '@/components/logo';
+import { Dithering } from '@paper-design/shaders-react';
 
 export default function HeroSection() {
   const t = useTranslations('hero');
-  const heroSrc = cdnAssetUrl('hero_banner.gif');
+  const tManifesto = useTranslations('manifesto');
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full h-screen bg-black flex items-center justify-center px-4 md:px-6">
       {/* SEO H1 - Visually hidden but available for screen readers and SEO */}
       <h1 className="sr-only">
         {t('seoHeading')}
       </h1>
 
-      {/* Hero Banner GIF as Background */}
-      {heroSrc && (
-        <Image
-          src={heroSrc}
-          alt="Dreeeams Hero Banner"
-          fill
-          sizes="100vw"
-          className="object-cover"
-          priority
-          quality={85}
-        />
-      )}
+      <div
+        className="w-full max-w-7xl relative"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <div className="relative overflow-hidden border border-black/10 bg-white shadow-sm min-h-[600px] md:min-h-[700px] flex flex-col items-center justify-center duration-500">
+          {/* Dithering shader background */}
+          <div className="absolute inset-0 z-0 pointer-events-none opacity-40 mix-blend-multiply">
+            <Dithering
+              colorBack="#00000000"
+              colorFront="#A5B3C2"
+              shape="warp"
+              type="4x4"
+              speed={isHovered ? 0.6 : 0.2}
+              className="w-full h-full"
+              minPixelRatio={1}
+            />
+          </div>
 
-      {/* Hero content cluster — single centered flex column */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-8 text-center z-10">
-        {/* Text group — mix-blend-difference for editorial feel */}
-        <div className="mix-blend-difference text-white max-w-3xl">
-          <m.span
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="block text-sm sm:text-base md:text-lg font-mono tracking-[0.3em] mb-4 uppercase"
-          >
-            {t('tagline')}
-          </m.span>
-          <m.h2
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, duration: 1 }}
-            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-nostalgic leading-tight tracking-wider"
-          >
-            {t('title')}
-          </m.h2>
-          <m.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
-            className="text-sm sm:text-base md:text-lg font-mono tracking-wide mt-6 drop-shadow-sm"
-          >
-            {t('subtitle')}
-          </m.p>
-        </div>
+          <div className="relative z-10 px-6 max-w-4xl mx-auto text-center flex flex-col items-center">
+            {/* Badge */}
+            <div className="mb-8 inline-flex items-center gap-2 border border-black bg-black/5 px-4 py-1.5 text-sm font-medium text-black backdrop-blur-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-black" />
+              </span>
+              {t('badge')}
+            </div>
 
-        {/* CTA cluster — outside blend mode, in natural flow below text */}
-        <m.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.8 }}
-          className="mt-10"
-        >
-          <div className="flex items-center gap-6 px-8 py-5 bg-black/40 backdrop-blur-md border border-white/10 rounded-sm">
+            {/* Headline with inline Logo */}
+            <h2 className="font-nostalgic text-4xl md:text-6xl lg:text-7xl tracking-tight text-black mb-12 leading-tight flex flex-wrap items-center justify-center gap-x-4">
+              {tManifesto('weAre')}{' '}
+              <Logo className="h-10 md:h-12 lg:h-16 w-auto inline-block" fill="black" />
+              , {tManifesto('description')}
+            </h2>
+
+            {/* CTA Button */}
             <Link
               href="/start"
-              className="px-8 py-3.5 text-sm font-medium tracking-wider bg-white text-black hover:bg-white/90 transition-colors duration-300"
+              className="group relative inline-flex h-14 items-center justify-center gap-3 overflow-hidden bg-black border-2 border-black px-12 text-base font-medium text-white transition-all duration-300 hover:bg-white hover:text-black active:scale-95"
             >
-              {t('buttons.startProject')} →
+              <span className="relative z-10">{t('cta')}</span>
+              <ArrowRight className="h-5 w-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
-            <a
-              href="#work"
-              className="text-sm font-mono tracking-wider text-white/80 hover:text-white border-b border-white/30 hover:border-white/70 pb-0.5 transition-all duration-300"
-            >
-              {t('buttons.viewWork')} ↓
-            </a>
           </div>
-        </m.div>
+        </div>
       </div>
     </div>
   );

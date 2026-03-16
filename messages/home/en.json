@@ -1,9 +1,10 @@
 {
   "hero": {
-    "tagline": "BOGOTÁ → WORLDWIDE",
-    "title": "Product engineering for companies that ship.",
-    "subtitle": "We design, build, and scale web and mobile products. React, Next.js, React Native.",
-    "cta": "Start Your Project",
+    "badge": "Tech & Design Studio",
+    "tagline": "Based in Bogotá. Working globally.",
+    "title": "We build and scale digital products.",
+    "subtitle": "We handle the technology, so you can focus on growth.",
+    "cta": "Book a Call",
     "seoHeading": "Professional Web Development Agency - Custom Mobile App Development - React, Next.js & React Native Experts",
     "buttons": {
       "startProject": "BOOK A CALL",
