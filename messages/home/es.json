@@ -54,26 +54,16 @@
     ]
   },
   "clients": {
-    "badge": "Con quién trabajamos",
-    "nonprofits": "Organizaciones Sin Fines de Lucro",
-    "smallBusinesses": "Pequeñas Empresas",
+    "badge": "Hecho para",
     "startups": "Startups",
-    "eventPlanners": "Organizadores de Eventos",
-    "ecommerce": "Comercio Electrónico",
-    "agencies": "Agencias",
-    "personalBrands": "Marcas Personales",
-    "construction": "Constructoras",
-    "restaurants": "Restaurantes & Cafés",
-    "healthcare": "Salud & Bienestar",
-    "realestate": "Bienes Raíces",
-    "education": "Educación & Capacitación",
-    "fitness": "Fitness & Deportes",
-    "consultants": "Consultores & Coaches"
+    "dtcEcommerce": "DTC y E-commerce",
+    "eventBusinesses": "Empresas de eventos",
+    "goingDigital": "Empresas digitalizándose"
   },
   "services": {
-    "title": "Construimos productos modulares, no páginas. Cada sistema multiplica tus resultados.",
-    "subtitle": "Tres sistemas. Un motor de crecimiento.",
-    "positioning": "No hacemos páginas bonitas. Construimos sistemas modulares que crecen con tu negocio.",
+    "title": "Sistemas que convierten. Arquitectura que escala.",
+    "subtitle": "La infraestructura detrás de tu crecimiento",
+    "positioning": "No hacemos páginas. Construimos sistemas modulares que crecen con tu negocio.",
     "proofStrip": "30K+ tickets vendidos · 90K+ visitantes únicos · 4.3 rating en apps",
     "techStack": {
       "title": "Tecnologias y Herramientas Que Usamos:",
@@ -148,8 +138,8 @@
       }
     },
     "mobileDev": {
-      "title": "Backend escalable",
-      "description": "APIs y backend listos para producción. Seguros, rápidos y documentados.",
+      "title": "Sistemas que escalan",
+      "description": "APIs y sistemas listos para producción. Seguros, rápidos y documentados.",
       "features": [
         "APIs REST y GraphQL",
         "Bases de datos optimizadas",
@@ -241,13 +231,13 @@
       }
     },
     "uiux": {
-      "title": "IA y automatización",
-      "description": "Agentes y automatizaciones que le ahorran horas a tu equipo.",
+      "title": "IA que trabaja por ti",
+      "description": "Agentes y automatizaciones que le dan apalancamiento a tu equipo — no más herramientas que gestionar.",
       "features": [
-        "Chatbots y agentes IA",
+        "Agentes IA a la medida",
         "Flujos automatizados",
         "Cualificación de leads",
-        "Análisis y datos en tiempo real"
+        "Datos y analítica en tiempo real"
       ],
       "metaDescription": "Soluciones impulsadas por IA y servicios de automatización. Ayudamos a las empresas a aprovechar la inteligencia artificial para aumentar la eficiencia y reducir costos.",
       "intro": {

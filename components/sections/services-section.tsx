@@ -36,11 +36,9 @@ export default function ServicesSection() {
 
   const clientTypes = [
     'startups',
-    'ecommerce',
-    'agencies',
-    'eventPlanners',
-    'smallBusinesses',
-    'personalBrands',
+    'dtcEcommerce',
+    'eventBusinesses',
+    'goingDigital',
   ];
 
   return (
@@ -54,7 +52,7 @@ export default function ServicesSection() {
           transition={{ duration: 0.8 }}
           className="mb-20"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-nostalgic max-w-4xl leading-tight mb-4 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-nostalgic max-w-3xl leading-tight mb-4 tracking-tight">
             {t('subtitle')}
           </h2>
           <p className="text-sm md:text-base font-mono tracking-widest text-muted-foreground">
@@ -82,7 +80,7 @@ export default function ServicesSection() {
                   className="relative min-h-[500px] overflow-hidden cursor-pointer transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:-translate-x-1"
                 >
                 {/* Top highlight line */}
-                <div className="absolute top-0 left-0 right-0 h-px z-20 transition-colors duration-500 bg-white/0 group-hover:bg-white/80" />
+                <div className="absolute top-0 left-0 right-0 h-px z-20 transition-colors duration-500 bg-white/10 group-hover:bg-white/80" />
 
                 {/* Border reveal on hover */}
                 <div className="absolute inset-0 border border-white/0 group-hover:border-white/15 transition-colors duration-500 z-20 pointer-events-none" />
@@ -94,7 +92,7 @@ export default function ServicesSection() {
                     alt={t(service.titleKey)}
                     fill
                     loading="lazy"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover transition-all duration-700 saturate-[0.15] brightness-75 group-hover:saturate-[0.3] group-hover:brightness-90 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 ) : (
@@ -102,7 +100,7 @@ export default function ServicesSection() {
                 )}
 
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/20 group-hover:from-black/70 group-hover:via-black/40 group-hover:to-black/25 transition-all duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/50 to-black/40 group-hover:from-black/80 group-hover:via-black/55 group-hover:to-black/35 transition-all duration-500" />
 
                 {/* Glass surface on hover */}
                 <div className="absolute inset-0 backdrop-blur-[0px] group-hover:backdrop-blur-[2px] transition-all duration-500" />
@@ -121,7 +119,7 @@ export default function ServicesSection() {
 
                   {/* Bottom Section — slides up on hover */}
                   <div className="mt-auto transition-transform duration-500 translate-y-3 group-hover:translate-y-0">
-                    <p className="text-base md:text-lg leading-relaxed text-white/60 group-hover:text-white/90 mb-6 transition-colors duration-300">
+                    <p className="text-base md:text-lg leading-relaxed text-white/70 group-hover:text-white/90 mb-6 transition-colors duration-300">
                       {t(service.descriptionKey)}
                     </p>
 
@@ -129,7 +127,7 @@ export default function ServicesSection() {
                     <ul className="space-y-2 mb-6">
                       {t.raw(`${service.titleKey.split('.')[0]}.features`).map((feature: string, idx: number) => (
                         <li key={idx} className="flex items-start text-sm md:text-base text-white/60 group-hover:text-white/80 transition-colors duration-300">
-                          <span className="mr-2 mt-1.5 h-1.5 w-1.5 rounded-full bg-white/60 group-hover:bg-white flex-shrink-0 transition-colors duration-300" />
+                          <span className="mr-2 mt-2.5 w-2 h-px bg-white/50 group-hover:bg-white flex-shrink-0 transition-colors duration-300" />
                           {feature}
                         </li>
                       ))}
@@ -155,8 +153,8 @@ export default function ServicesSection() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <div className="inline-block px-4 py-1.5 border border-black/20">
-              <p className="text-xs font-medium tracking-wider uppercase text-black/60">
+            <div className="inline-block px-4 py-1.5 border border-black/30">
+              <p className="text-xs font-medium tracking-wider uppercase text-black/70">
                 {tClients('badge')}
               </p>
             </div>
@@ -173,7 +171,7 @@ export default function ServicesSection() {
             {clientTypes.map((type) => (
               <div
                 key={type}
-                className="px-5 py-2.5 border border-black/10 hover:border-black/30 hover:bg-black/5 transition-colors"
+                className="px-6 py-3 border border-black/10 hover:border-black/30 hover:bg-black/5 transition-colors"
               >
                 <span className="text-sm md:text-base font-medium text-black/80">
                   {tClients(type)}

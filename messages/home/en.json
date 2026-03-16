@@ -54,38 +54,28 @@
     ]
   },
   "clients": {
-    "badge": "Who we love to work with",
-    "nonprofits": "Non-Profits",
-    "smallBusinesses": "Small Businesses",
+    "badge": "Built for",
     "startups": "Startups",
-    "eventPlanners": "Event Planners",
-    "ecommerce": "Ecommerce Businesses",
-    "agencies": "Agencies",
-    "personalBrands": "Personal Brands",
-    "construction": "Construction Companies",
-    "restaurants": "Restaurants & Cafes",
-    "healthcare": "Healthcare & Wellness",
-    "realestate": "Real Estate",
-    "education": "Education & Training",
-    "fitness": "Fitness & Sports",
-    "consultants": "Consultants & Coaches"
+    "dtcEcommerce": "DTC & E-commerce",
+    "eventBusinesses": "Event Businesses",
+    "goingDigital": "Companies Going Digital"
   },
   "services": {
-    "title": "We build modular products, not pages. Each system compounds your results.",
-    "subtitle": "Three systems. One growth engine.",
-    "positioning": "We don't design pages. We build modular systems that scale with your business.",
+    "title": "Systems that convert. Architecture that scales.",
+    "subtitle": "The infrastructure behind your growth",
+    "positioning": "We don't build pages. We build modular systems that scale with your business.",
     "proofStrip": "30K+ tickets sold · 90K+ unique visitors · 4.3 app rating",
     "techStack": {
       "title": "Technologies & Tools We Use:",
       "andMore": "And many more..."
     },
     "webDev": {
-      "title": "Conversion-First Web",
-      "description": "Strategic interfaces that turn traffic into qualified leads. High-performance, SEO-optimized, built to measure.",
+      "title": "Web that converts",
+      "description": "Interfaces that turn traffic into revenue. Fast, measurable, built to sell.",
       "features": [
-        "High-performance landing systems",
-        "Modular UI architecture",
-        "Brand-integrated design",
+        "High-performance landings",
+        "Modular UI system",
+        "On-brand design",
         "Conversion-optimized flows"
       ],
       "metaDescription": "We design and develop interfaces that turn traffic into leads and sales, without sacrificing performance or brand.",
@@ -148,13 +138,13 @@
       }
     },
     "mobileDev": {
-      "title": "Scalable Infrastructure",
-      "description": "APIs, databases, and backend systems engineered for reliability and growth. Secure, documented, production-ready.",
+      "title": "Systems that scale",
+      "description": "APIs and infrastructure built for production. Secure, fast, documented.",
       "features": [
-        "Modern stack (React, Next.js)",
-        "API architecture",
-        "CRM & tool integrations",
-        "Secure & scalable foundations"
+        "REST & GraphQL APIs",
+        "Optimized databases",
+        "Auth & security built in",
+        "Infrastructure that grows"
       ],
       "metaDescription": "Robust backend development and API services. We build scalable, secure backend systems that power your applications.",
       "intro": {
@@ -241,13 +231,13 @@
       }
     },
     "uiux": {
-      "title": "AI & Automation",
-      "description": "Custom AI agents, workflow automation, and data pipelines that multiply your team's operational capacity.",
+      "title": "AI that works for you",
+      "description": "Agents and automations that give your team leverage — not more tools to manage.",
       "features": [
-        "AI-powered chatbots",
+        "Custom AI agents",
         "Workflow automation",
-        "Lead qualification systems",
-        "Data-driven optimization"
+        "Lead qualification",
+        "Real-time data & analytics"
       ],
       "metaDescription": "AI-powered solutions and automation services. We help businesses leverage artificial intelligence to increase efficiency and reduce costs.",
       "intro": {
