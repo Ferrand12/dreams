@@ -7,40 +7,33 @@ interface DesktopNavProps {
   isVisible: boolean;
   servicesLabel: string;
   portfolioLabel: string;
+  aboutLabel: string;
   getStartedLabel: string;
   isContactPage: boolean;
 }
 
-export default function DesktopNav({ isAtTop, isVisible, servicesLabel, portfolioLabel, getStartedLabel, isContactPage }: DesktopNavProps) {
+export default function DesktopNav({ isAtTop, isVisible, servicesLabel, portfolioLabel, aboutLabel, getStartedLabel, isContactPage }: DesktopNavProps) {
+  const linkClass = `md:block hidden px-4 py-2 text-sm font-medium border transition-fast ${
+    isAtTop
+      ? 'text-white border-overlay-border-medium hover:bg-white hover:text-black'
+      : 'text-foreground-light border-black/10 hover:border-black hover:text-white hover:bg-black'
+  }`;
+
   return (
     <>
-      {/* Desktop Services Link */}
-      <m.a
-        whileTap={{ scale: 0.98 }}
-        href="#services"
-        className={`md:block hidden px-4 py-2 text-sm font-medium border transition-fast ${
-          isAtTop
-            ? 'text-white border-overlay-border-medium hover:bg-white hover:text-black'
-            : 'text-foreground-light border-black/10 hover:border-black hover:text-white hover:bg-black'
-        }`}
-      >
+      <m.a whileTap={{ scale: 0.98 }} href="#services" className={linkClass}>
         {servicesLabel}
       </m.a>
 
-      {/* Desktop Portfolio Link */}
-      <m.a
-        whileTap={{ scale: 0.98 }}
-        href="#work"
-        className={`md:block hidden px-4 py-2 text-sm font-medium border transition-fast ${
-          isAtTop
-            ? 'text-white border-overlay-border-medium hover:bg-white hover:text-black'
-            : 'text-foreground-light border-black/10 hover:border-black hover:text-white hover:bg-black'
-        }`}
-      >
+      <m.a whileTap={{ scale: 0.98 }} href="#work" className={linkClass}>
         {portfolioLabel}
       </m.a>
 
-      {/* Contact Button - Visible when header is visible - Desktop only */}
+      <m.a whileTap={{ scale: 0.98 }} href="/about" className={linkClass}>
+        {aboutLabel}
+      </m.a>
+
+      {/* CTA Button - Desktop only */}
       {isVisible && !isContactPage && (
         <m.a
           layoutId="get-started-button"

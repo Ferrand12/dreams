@@ -73,6 +73,9 @@ export default function FooterSection() {
               <a href="#contact" className="block text-sm text-muted hover:text-white transition-colors">
                 {tFooter('contact')}
               </a>
+              <Link href="/about" className="block text-sm text-muted hover:text-white transition-colors">
+                {tFooter('about')}
+              </Link>
             </div>
 
             <div className="space-y-3">

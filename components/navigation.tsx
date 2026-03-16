@@ -60,6 +60,7 @@ export default function Navigation() {
   const menuItems = [
     { label: t('services'), href: '#services' },
     { label: 'Portfolio', href: '#work' },
+    { label: t('about'), href: '/about' },
     { label: t('getStarted'), href: '/start' },
   ];
 
@@ -140,6 +141,7 @@ export default function Navigation() {
                 isVisible={isVisible}
                 servicesLabel={t('services')}
                 portfolioLabel={t('work')}
+                aboutLabel={t('about')}
                 getStartedLabel={t('getStarted')}
                 isContactPage={isContactPage}
               />
