@@ -506,33 +506,34 @@
     "subtitle": "La gente detrás de los productos"
   },
   "faq": {
-    "title": "Preguntas Frecuentes",
-    "intro": "¿Aún tienes dudas sobre cómo es trabajar juntos?",
-    "introSub": "Estas son las preguntas más comunes.",
+    "label": "Trabajar con nosotros",
+    "title": "Respuestas claras, sin rodeos.",
+    "supporting": "Todo lo que necesitas saber antes de iniciar un proyecto con Dreeeams. Proceso, tiempos, inversión y qué esperar.",
+    "cta": "Agendar llamada",
     "questions": {
       "q1": {
-        "question": "¿Qué tipo de proyectos son los más adecuados para Dreeeams?",
-        "answer": "Somos la mejor opción para empresas que necesitan una construcción digital seria — no solo un retoque visual.\nEso suele significar: plataformas web, sitios de producto con objetivos de negocio reales, apps móviles, sistemas backend e integraciones, o flujos de trabajo con IA y automatización.\nSi necesitas algo estratégico, escalable y bien ejecutado, probablemente somos un buen match."
+        "question": "¿Qué tipo de proyectos toman?",
+        "answer": "Trabajamos con empresas que necesitan sistemas digitales reales — no solo un retoque visual.\nEso incluye: plataformas web, sitios de producto con objetivos de negocio, apps móviles, infraestructura backend, integraciones y flujos de automatización con IA.\nSi el proyecto necesita ser estratégico, escalable y bien ejecutado, somos un buen fit."
       },
       "q2": {
-        "question": "¿Cuál es el presupuesto típico de un proyecto?",
-        "answer": "Depende del tipo de proyecto.\nSoluciones rápidas y puntuales — como un landing o una integración específica — están en el rango menor. Productos completos, apps móviles y sistemas de IA/automatización requieren más inversión.\nDefinimos alcance primero y luego recomendamos el presupuesto adecuado. Sin sorpresas."
+        "question": "¿Cuánto cuesta un proyecto?",
+        "answer": "Depende del alcance.\nProyectos puntuales — un sistema de landing, una integración específica — están en un rango. Productos completos, apps móviles y sistemas de IA requieren más inversión.\nDefinimos alcance primero y luego recomendamos el presupuesto adecuado. Sin sorpresas."
       },
       "q3": {
-        "question": "¿Cuánto tiempo toma un proyecto normalmente?",
-        "answer": "Depende del tipo de construcción.\nUn sitio web enfocado o sistema de landing puede tomar 4–6 semanas. Una app móvil o plataforma compleja suele tomar 3–6 meses.\nDefinimos el cronograma durante nuestra primera llamada basándonos en tus objetivos y requerimientos."
+        "question": "¿Cuánto tiempo toma un proyecto?",
+        "answer": "Un sitio web enfocado o sistema de landing: 4–6 semanas. Una app móvil o plataforma compleja: 3–6 meses.\nDefinimos el cronograma en nuestra primera llamada según tus objetivos y requerimientos técnicos."
       },
       "q4": {
-        "question": "¿Qué necesitan de nosotros antes de empezar?",
-        "answer": "Como mínimo, necesitamos claridad sobre tu objetivo.\nPuede ser: el problema que quieres resolver, el producto que quieres lanzar, el sistema que quieres mejorar, o el resultado que quieres que genere la construcción.\nNo necesitas documentación perfecta antes de contactarnos. Pero entre más claro sea tu objetivo, más rápido podemos definir alcance y ejecutar."
+        "question": "¿Qué necesitan de nosotros para empezar?",
+        "answer": "Claridad sobre tu objetivo.\nEl problema que quieres resolver, el producto que quieres lanzar o el sistema que quieres mejorar.\nNo necesitas documentación perfecta. Pero entre más claro sea tu objetivo, más rápido definimos alcance y ejecutamos."
       },
       "q5": {
-        "question": "¿Pueden trabajar con nuestro equipo interno o producto existente?",
-        "answer": "Sí.\nPodemos trabajar como socio de construcción independiente o colaborar con tu equipo interno — diseñadores, desarrolladores o líderes de producto.\nTambién tomamos productos existentes cuando el setup actual necesita rediseño, refactorización o una ejecución técnica más sólida."
+        "question": "¿Pueden trabajar con nuestro equipo o producto existente?",
+        "answer": "Sí. Trabajamos como partner de construcción independiente o junto a tu equipo interno — diseñadores, desarrolladores o líderes de producto.\nTambién tomamos productos existentes cuando necesitan rediseño, refactorización o una ejecución técnica más sólida."
       },
       "q6": {
-        "question": "¿Dan soporte al producto después del lanzamiento?",
-        "answer": "Sí.\nMuchos proyectos continúan después del lanzamiento con mejoras, nuevas funcionalidades, soporte técnico, refinamientos de rendimiento e iteración de producto.\nPreferimos construir sistemas que puedan evolucionar — no entregar algo una vez y desaparecer."
+        "question": "¿Dan soporte después del lanzamiento?",
+        "answer": "Sí. La mayoría de proyectos continúan después del lanzamiento — mejoras, nuevas funcionalidades, soporte técnico, optimización de rendimiento e iteración de producto.\nConstruimos sistemas que evolucionan. No entregamos y desaparecemos."
       }
     }
   },

@@ -30,7 +30,7 @@ const TimelineSection = dynamic(() => import('@/components/sections/timeline-sec
   loading: () => <div className="min-h-[30vh] bg-surface-light-1" />,
 });
 const FAQSection = dynamic(() => import('@/components/sections/faq-section'), {
-  loading: () => <div className="min-h-[50vh] bg-surface-light-1" />,
+  loading: () => <div className="min-h-[50vh] bg-white" />,
 });
 const CTASection = dynamic(() => import('@/components/sections/cta-section'), {
   loading: () => <div className="min-h-[30vh] bg-black" />,

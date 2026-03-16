@@ -506,33 +506,34 @@
     "subtitle": "Talented people behind great products"
   },
   "faq": {
-    "title": "Frequently Asked Questions",
-    "intro": "Still wondering how working together looks?",
-    "introSub": "Here are a few common questions.",
+    "label": "Working with us",
+    "title": "Clear answers, no sales pitch.",
+    "supporting": "Everything you need to know before starting a project with Dreeeams. Process, timelines, investment, and what to expect.",
+    "cta": "Book a call",
     "questions": {
       "q1": {
-        "question": "What kind of projects are the best fit for Dreeeams?",
-        "answer": "We're the best fit for companies that need a serious digital build — not just a quick visual refresh.\nThat usually means: web platforms, product websites with real business goals, mobile apps, backend systems and integrations, or AI and automation workflows.\nIf you need something strategic, scalable, and well executed, we're probably a strong match."
+        "question": "What kind of projects do you take on?",
+        "answer": "We work with companies that need real digital systems — not just a visual refresh.\nThat means: web platforms, product sites with business goals, mobile apps, backend infrastructure, integrations, and AI automation workflows.\nIf the build needs to be strategic, scalable, and well-executed, we're a good fit."
       },
       "q2": {
-        "question": "What is the typical project budget?",
-        "answer": "It depends on the type of build.\nQuick, targeted solutions — like a landing page or a specific integration — are on the lighter end. Full product builds, mobile apps, and AI/automation systems require more investment.\nWe define scope first, then recommend the right budget range. No surprises."
+        "question": "What does a project typically cost?",
+        "answer": "It depends on scope.\nTargeted builds — a landing system, a specific integration — sit at one end. Full product builds, mobile apps, and AI/automation systems require more investment.\nWe define scope first, then recommend the right budget range. No surprises."
       },
       "q3": {
-        "question": "How long does a project usually take?",
-        "answer": "It depends on the type of build.\nA focused website or landing system can take 4–6 weeks. A mobile app or complex platform usually runs 3–6 months.\nWe scope the timeline during our first call based on your goals and requirements."
+        "question": "How long does a project take?",
+        "answer": "A focused website or landing system: 4–6 weeks. A mobile app or complex platform: 3–6 months.\nWe scope the timeline during our first call based on your goals and technical requirements."
       },
       "q4": {
-        "question": "What do you need from us before we start?",
-        "answer": "At minimum, we need clarity on your goal.\nThat can be: the problem you want to solve, the product you want to launch, the system you want to improve, or the result you want the build to generate.\nYou do not need perfect documentation before reaching out. But the clearer your objective, the faster we can scope and execute."
+        "question": "What do you need from us to start?",
+        "answer": "Clarity on your goal.\nThe problem you want to solve, the product you want to launch, or the system you want to improve.\nYou don't need perfect documentation. But the clearer your objective, the faster we scope and execute."
       },
       "q5": {
-        "question": "Can you work with our internal team or existing product?",
-        "answer": "Yes.\nWe can work as an independent build partner or collaborate with your internal team — designers, developers, or product leads.\nWe also take over existing products when the current setup needs redesign, refactoring, or stronger technical execution."
+        "question": "Can you work with our existing team or product?",
+        "answer": "Yes. We work as an independent build partner or alongside your internal team — designers, developers, or product leads.\nWe also take over existing products when the current setup needs redesign, refactoring, or stronger technical execution."
       },
       "q6": {
         "question": "Do you support the product after launch?",
-        "answer": "Yes.\nMany projects continue after launch through improvements, new features, technical support, performance refinements, and product iteration.\nWe prefer building systems that can evolve — not shipping something once and disappearing."
+        "answer": "Yes. Most projects continue after launch — improvements, new features, technical support, performance tuning, and product iteration.\nWe build systems that evolve. We don't ship once and disappear."
       }
     }
   },
