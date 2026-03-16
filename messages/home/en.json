@@ -440,9 +440,17 @@
       "huntTickets": {
         "description": "Event ticketing app. 30K+ tickets processed, 4.3★ App Store rating, 5K+ downloads in first year.",
         "impactLine": "Mobile ticketing for Colombia's event industry. 30K+ tickets in year one.",
-        "problem": "Events in Colombia had no reliable mobile ticketing. Buyers used cash or bank transfers.",
-        "solution": "Native app with real-time inventory, QR validation, and integrated payment processing.",
-        "result": "30K+ tickets sold, 4.3★ rating, 5K+ downloads in year one."
+        "problem": "Colombia's live event industry had no reliable mobile ticketing infrastructure. Buyers paid in cash or bank transfers. Organizers had no real-time inventory visibility, no digital validation, and no data on who attended their events.",
+        "solution": "We built a native mobile app from scratch — real-time seat inventory, QR-based entry validation, and integrated payment processing with local and international methods. The system was designed to handle high-concurrency ticket drops without failing under load.",
+        "result": "30K+ tickets sold. 4.3★ App Store rating. 5K+ downloads in the first year. Hunt became the default ticketing system for multiple venues across Colombia.",
+        "deliverables": [
+          "React Native mobile app (iOS + Android)",
+          "Real-time inventory and seat management",
+          "QR validation system for entry",
+          "Payment processing (local + international)",
+          "Event analytics dashboard",
+          "Push notification system"
+        ]
       },
       "startupMvp": {
         "description": "SaaS MVP for a workforce management startup. Shipped in 6 weeks from zero to production.",

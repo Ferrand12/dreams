@@ -160,6 +160,7 @@ export type Project = {
   solutionKey?: string;
   resultKey?: string;
   deliverables?: string[];
+  deliverablesKey?: string;
 
   // Links
   liveUrl?: string;

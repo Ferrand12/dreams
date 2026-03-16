@@ -145,6 +145,7 @@ export const projects: Project[] = [
     problemKey: 'projects.huntTickets.problem',
     solutionKey: 'projects.huntTickets.solution',
     resultKey: 'projects.huntTickets.result',
+    deliverablesKey: 'projects.huntTickets.deliverables',
     metrics: [
       { value: '30K+', labelKey: 'metrics.ticketsSold' },
       { value: '4.3★', labelKey: 'metrics.appRating' },
