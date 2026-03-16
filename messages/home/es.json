@@ -1,10 +1,14 @@
 {
   "hero": {
-    "badge": "Tech & Design Studio",
+    "badge": "Tech Studio",
     "tagline": "Desde Bogotá. Trabajando globalmente.",
-    "title": "Construimos infraestructura digital que convierte.",
-    "subtitle": "Desde landing pages hasta IA — tu partner técnico con stack moderno y sistemas modulares.",
+    "title": "Construimos sistemas en los que las empresas confían.",
+    "subtitle": "Sistemas sobre páginas. Ejecución sobre ruido.",
     "cta": "Agendar Llamada",
+    "cards": {
+      "card1": "Claridad sobre complejidad",
+      "card2": "Pensamiento a largo plazo"
+    },
     "seoHeading": "Agencia de Desarrollo Web Profesional - Desarrollo de Apps Móviles - Expertos en React, Next.js y React Native",
     "buttons": {
       "startProject": "AGENDAR LLAMADA",

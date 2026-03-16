@@ -1,10 +1,14 @@
 {
   "hero": {
-    "badge": "Tech & Design Studio",
+    "badge": "Tech Studio",
     "tagline": "Based in Bogotá. Working globally.",
-    "title": "We build digital infrastructure that converts.",
-    "subtitle": "From landing pages to AI — your technical partner with modern stack and modular systems.",
+    "title": "We build systems companies rely on.",
+    "subtitle": "Systems over pages. Execution over noise.",
     "cta": "Book a Call",
+    "cards": {
+      "card1": "Clarity over complexity",
+      "card2": "Long-term thinking"
+    },
     "seoHeading": "Professional Web Development Agency - Custom Mobile App Development - React, Next.js & React Native Experts",
     "buttons": {
       "startProject": "BOOK A CALL",
