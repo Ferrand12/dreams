@@ -75,40 +75,43 @@ function HeroLayout({ project, index, isDark, t }: LayoutProps) {
     <m.div
       initial="initial"
       whileInView="animate"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.15 }}
       variants={fadeInUp}
       transition={{ ...transitions.smooth, delay: index * 0.1 }}
       className={cn(
-        'py-12 md:py-16 px-6 md:px-10',
-        isDark ? 'bg-[#121212] text-white' : 'bg-white text-black'
+        'py-16 md:py-24 -mx-6 md:-mx-12 px-6 md:px-12',
+        isDark ? 'bg-[#121212] text-white' : 'bg-surface-light-1 text-black'
       )}
     >
-      {/* Hero image */}
+      {/* Hero image — full bleed within container */}
       <CaseImage
         src={project.imageSrc}
         alt={project.titleKey}
-        aspect="aspect-[16/10]"
+        aspect="aspect-[16/10] md:aspect-[2/1]"
         priority={index < 1}
       />
 
-      {/* Content: 2-col on desktop */}
-      <div className="mt-6 md:mt-8 md:grid md:grid-cols-12 md:gap-8">
-        {/* Left: identity */}
-        <div className="md:col-span-7 space-y-3">
+      {/* Editorial content — 2-col with clear separation */}
+      <div className={cn(
+        'mt-8 md:mt-12 pt-8 md:pt-10 md:grid md:grid-cols-12 md:gap-12 border-t',
+        isDark ? 'border-white/10' : 'border-black/10'
+      )}>
+        {/* Left: identity block */}
+        <div className="md:col-span-7">
           <span className={cn(
-            'text-xs font-mono tracking-widest uppercase',
+            'text-xs font-mono tracking-widest uppercase block mb-3',
             isDark ? 'text-white/40' : 'text-black/40'
           )}>
             {t(`categories.${project.categoryKey}`)}
           </span>
 
-          <h3 className="text-3xl md:text-4xl lg:text-5xl font-nostalgic tracking-tight">
+          <h3 className="text-3xl md:text-4xl lg:text-5xl font-nostalgic tracking-tight leading-[1.1]">
             {project.titleKey}
           </h3>
 
           {project.impactLineKey && (
             <p className={cn(
-              'text-sm md:text-base leading-relaxed max-w-lg',
+              'text-base md:text-lg leading-relaxed mt-4 max-w-lg',
               isDark ? 'text-white/60' : 'text-black/60'
             )}>
               {t(project.impactLineKey!)}
@@ -116,18 +119,22 @@ function HeroLayout({ project, index, isDark, t }: LayoutProps) {
           )}
 
           <p className={cn(
-            'text-xs font-mono tracking-wider',
-            isDark ? 'text-white/30' : 'text-black/30'
+            'text-xs font-mono tracking-wider mt-6',
+            isDark ? 'text-white/25' : 'text-black/25'
           )}>
             {project.tags.join(' · ')}
           </p>
         </div>
 
-        {/* Right: proof + CTA */}
-        <div className="md:col-span-5 mt-6 md:mt-0 space-y-6">
-          <CaseMetrics metrics={project.metrics} isDark={isDark} t={t} />
-          <StateBadge state={project.contentState} isDark={isDark} t={t} />
-          <CaseCTA cta={project.cta} isDark={isDark} t={t} />
+        {/* Right: metrics + CTA */}
+        <div className="md:col-span-5 mt-8 md:mt-0 flex flex-col justify-between">
+          <div>
+            <CaseMetrics metrics={project.metrics} isDark={isDark} t={t} />
+          </div>
+          <div className="mt-6">
+            <StateBadge state={project.contentState} isDark={isDark} t={t} />
+            <CaseCTA cta={project.cta} isDark={isDark} t={t} />
+          </div>
         </div>
       </div>
     </m.div>
@@ -143,12 +150,12 @@ function StandardLayout({ project, index, isDark, t }: LayoutProps) {
       whileInView="animate"
       viewport={{ once: true, amount: 0.2 }}
       variants={fadeInUp}
-      transition={{ ...transitions.smooth, delay: index * 0.1 }}
+      transition={{ ...transitions.smooth, delay: index * 0.15 }}
       className={cn(
-        'border overflow-hidden',
+        'overflow-hidden',
         isDark
-          ? 'bg-[#121212] text-white border-white/10'
-          : 'bg-white text-black border-black/10'
+          ? 'bg-[#121212] text-white'
+          : 'bg-surface-light-2 text-black'
       )}
     >
       {/* Image */}
@@ -160,9 +167,9 @@ function StandardLayout({ project, index, isDark, t }: LayoutProps) {
       />
 
       {/* Content */}
-      <div className="p-6 space-y-3">
+      <div className="p-6 md:p-8">
         <span className={cn(
-          'text-xs font-mono tracking-widest uppercase',
+          'text-xs font-mono tracking-widest uppercase block mb-3',
           isDark ? 'text-white/40' : 'text-black/40'
         )}>
           {t(`categories.${project.categoryKey}`)}
@@ -174,7 +181,7 @@ function StandardLayout({ project, index, isDark, t }: LayoutProps) {
 
         {project.impactLineKey && (
           <p className={cn(
-            'text-sm leading-relaxed',
+            'text-sm leading-relaxed mt-2',
             isDark ? 'text-white/60' : 'text-black/60'
           )}>
             {t(project.impactLineKey!)}
@@ -184,14 +191,16 @@ function StandardLayout({ project, index, isDark, t }: LayoutProps) {
         <CaseMetrics metrics={project.metrics} isDark={isDark} t={t} compact />
 
         <p className={cn(
-          'text-xs font-mono tracking-wider',
-          isDark ? 'text-white/30' : 'text-black/30'
+          'text-xs font-mono tracking-wider mt-4',
+          isDark ? 'text-white/25' : 'text-black/25'
         )}>
           {project.tags.join(' · ')}
         </p>
 
-        <StateBadge state={project.contentState} isDark={isDark} t={t} />
-        <CaseCTA cta={project.cta} isDark={isDark} t={t} />
+        <div className="mt-5">
+          <StateBadge state={project.contentState} isDark={isDark} t={t} />
+          <CaseCTA cta={project.cta} isDark={isDark} t={t} />
+        </div>
       </div>
     </m.div>
   );
@@ -271,12 +280,22 @@ function CaseImage({
     );
   }
 
-  // Generated placeholder: dark bg + title
+  // Generated placeholder: structured dark block with title + grid texture
   return (
-    <div className={cn(aspect, 'relative overflow-hidden bg-[#121212] flex items-center justify-center')}>
-      <span className="text-4xl md:text-5xl font-nostalgic text-white/10 tracking-tight select-none">
-        {alt}
-      </span>
+    <div className={cn(aspect, 'relative overflow-hidden bg-[#0a0a0a] flex items-end p-8 md:p-12')}>
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+        }}
+      />
+      <div className="relative z-10">
+        <span className="text-xs font-mono tracking-widest uppercase text-white/20 block mb-2">
+          {alt}
+        </span>
+        <div className="w-16 h-px bg-white/10" />
+      </div>
     </div>
   );
 }
@@ -294,25 +313,30 @@ function CaseMetrics({
 }) {
   if (!metrics || metrics.length === 0) return null;
 
+  if (compact) {
+    return (
+      <div className="flex flex-wrap gap-x-4 gap-y-1">
+        {metrics.map((metric, idx) => (
+          <div key={idx}>
+            <span className="font-mono text-sm font-bold">{metric.value}</span>
+            <span className={cn('ml-1.5 text-xs', isDark ? 'text-white/40' : 'text-black/40')}>
+              {t(metric.labelKey)}
+            </span>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // Full display: stacked vertically for visual weight
   return (
-    <div className={cn(
-      'flex flex-wrap',
-      compact ? 'gap-x-4 gap-y-1' : 'gap-x-6 gap-y-2 pt-3 border-t',
-      !compact && (isDark ? 'border-white/10' : 'border-black/10')
-    )}>
+    <div className="space-y-4">
       {metrics.map((metric, idx) => (
         <div key={idx}>
-          <span className={cn(
-            'font-mono font-bold',
-            compact ? 'text-sm' : 'text-lg md:text-xl'
-          )}>
+          <span className="font-mono text-2xl md:text-3xl font-bold block leading-none">
             {metric.value}
           </span>
-          <span className={cn(
-            'ml-1.5',
-            compact ? 'text-xs' : 'text-xs',
-            isDark ? 'text-white/40' : 'text-black/40'
-          )}>
+          <span className={cn('text-xs mt-1 block', isDark ? 'text-white/40' : 'text-black/40')}>
             {t(metric.labelKey)}
           </span>
         </div>
@@ -374,8 +398,10 @@ function CaseCTA({
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
       className={cn(
-        'inline-flex items-center gap-2 text-sm font-medium transition-opacity hover:opacity-70',
-        isDark ? 'text-white' : 'text-black'
+        'inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 border transition-all duration-200 w-fit',
+        isDark
+          ? 'text-white border-white/20 hover:bg-white hover:text-black'
+          : 'text-black border-black/20 hover:bg-black hover:text-white'
       )}
     >
       {t(cta.labelKey)} →

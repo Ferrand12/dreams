@@ -352,8 +352,8 @@
   },
   "portfolio": {
     "eyebrow": "Selected Work",
-    "title": "Our Work",
-    "subtitle": "Products we've shipped. Results we've measured.",
+    "title": "Built to convert. Shipped to scale.",
+    "subtitle": "Real systems running in production. Not concepts.",
     "categories": {
       "webPlatform": "WEB PLATFORM",
       "mobileApp": "MOBILE APP",

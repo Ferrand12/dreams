@@ -42,7 +42,7 @@ export default function PortfolioSection() {
 
         {/* Hero blocks — full width, generous spacing */}
         {heroProjects.length > 0 && (
-          <div className="space-y-16 mb-12">
+          <div className="mb-12 md:mb-16">
             {heroProjects.map((project, i) => (
               <FeaturedCase key={project.slug} project={project} index={i} />
             ))}
@@ -51,7 +51,7 @@ export default function PortfolioSection() {
 
         {/* Standard grid — 2 columns */}
         {standardProjects.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12">
             {standardProjects.map((project, i) => (
               <FeaturedCase key={project.slug} project={project} index={i} />
             ))}
