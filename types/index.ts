@@ -151,6 +151,7 @@ export type Project = {
   galleryBg?: string;
   galleryTheme?: 'light' | 'dark';
   galleryImageSize?: 'default' | 'large' | 'full';
+  galleryImage?: string;
 
   // Visual (progressive — add as assets become available)
   heroImage?: string;

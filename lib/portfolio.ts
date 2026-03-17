@@ -156,6 +156,7 @@ export const projects: Project[] = [
     galleryBg: '#0C0F14',
     galleryTheme: 'dark',
     galleryImageSize: 'large',
+    galleryImage: '/images/hunt_logo.png',
     teaserVariant: 'hero',
     order: 1,
     bgTheme: 'dark',

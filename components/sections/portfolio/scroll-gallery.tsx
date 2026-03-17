@@ -82,6 +82,7 @@ function GalleryPanel({
   const bg = project.galleryBg || '#121212';
   const theme = panelTheme(project);
   const imgSize = imageMaxWidth(project);
+  const heroSrc = project.galleryImage || project.imageSrc;
 
   const segmentLabel =
     project.segment === 'enterprise'
@@ -125,7 +126,7 @@ function GalleryPanel({
       {/* Hero image */}
       <div className="flex-1 flex items-center justify-center px-4 md:px-10 lg:px-16 py-6 md:py-8">
         <div className={cn('relative w-full aspect-[16/10] md:aspect-[16/9]', imgSize)}>
-          <SlideImage src={project.imageSrc} alt={project.titleKey} isLight={theme.isLight} />
+          <SlideImage src={heroSrc} alt={project.titleKey} isLight={theme.isLight} />
         </div>
       </div>
 
