@@ -118,8 +118,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
           {/* Content that scrolls over hero */}
           <div className="relative z-10 mt-[100vh]">
-            <ManifestoSection />
             <ServicesSection />
+            <ManifestoSection />
             <PortfolioSection />
             <TimelineSection />
             <CTASection />
