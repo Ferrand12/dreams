@@ -149,6 +149,8 @@ export type Project = {
   // Gallery (fullscreen work reel on homepage)
   galleryOrder?: number;
   galleryBg?: string;
+  galleryTheme?: 'light' | 'dark';
+  galleryImageSize?: 'default' | 'large' | 'full';
 
   // Visual (progressive — add as assets become available)
   heroImage?: string;
