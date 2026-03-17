@@ -161,6 +161,7 @@ export const projects: Project[] = [
     editorialStateOverride: 'published',
     detailPageSlug: 'hunt-tickets',
     heroImage: 'hunt_mockup.png',
+    mockupUrl: 'https://eeyjhkhrdoouapuilwep.supabase.co/storage/v1/object/public/content/hunt_mockup.png',
     impactLineKey: 'projects.huntTickets.impactLine',
     problemKey: 'projects.huntTickets.problem',
     solutionKey: 'projects.huntTickets.solution',
