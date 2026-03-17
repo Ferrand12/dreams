@@ -4,7 +4,6 @@ import HeroSection from '@/components/sections/hero-section';
 import ManifestoSection from '@/components/sections/manifesto-section';
 import FooterSection from '@/components/sections/footer-section';
 import SkipToContent from '@/components/skip-to-content';
-import { SkeletonProjectCard } from '@/components/skeleton';
 import Script from 'next/script';
 
 // Lazy load below-the-fold sections for better initial load performance
@@ -13,16 +12,15 @@ const ServicesSection = dynamic(() => import('@/components/sections/services-sec
 });
 const PortfolioSection = dynamic(() => import('@/components/sections/portfolio-section'), {
   loading: () => (
-    <div className="py-24 md:py-32 px-6 md:px-12 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="h-8 w-32 bg-gray-100 animate-pulse mb-4" />
-        <div className="h-14 w-80 bg-gray-100 animate-pulse mb-16" />
-        <div className="h-64 md:h-80 bg-gray-100 animate-pulse mb-12" />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <SkeletonProjectCard />
-          <SkeletonProjectCard />
+    <div className="bg-[#0A0A0A]">
+      <div className="px-6 md:px-12 lg:px-16 pt-24 md:pt-32 pb-16 md:pb-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="h-3 w-24 bg-white/5 animate-pulse mb-6" />
+          <div className="h-12 w-96 max-w-full bg-white/5 animate-pulse mb-4" />
+          <div className="h-4 w-64 bg-white/[0.03] animate-pulse" />
         </div>
       </div>
+      <div className="h-screen bg-[#121212]" />
     </div>
   ),
 });

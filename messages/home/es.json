@@ -457,20 +457,6 @@
           "Dashboard de analítica de eventos",
           "Sistema de notificaciones push"
         ]
-      },
-      "startupMvp": {
-        "description": "MVP SaaS para una startup de gestión de personal. De cero a producción en 6 semanas.",
-        "impactLine": "MVP SaaS lanzado en 6 semanas. Ronda semilla con producto funcional.",
-        "problem": "Los founders necesitaban validar su idea antes de levantar capital, sin equipo técnico.",
-        "solution": "MVP full-stack con auth, dashboards y facturación Stripe. Next.js + Supabase.",
-        "result": "Lanzado en 6 semanas. Levantaron ronda semilla con producto funcional."
-      },
-      "ecommerceLanding": {
-        "description": "Sistema de landing enfocado en conversión para una marca DTC. 3x en captura de leads.",
-        "impactLine": "Sistema de landing para marca DTC. 3x en tasa de captura.",
-        "problem": "Una marca DTC enviaba tráfico pago a una página genérica de Shopify. Baja conversión, sin medición.",
-        "solution": "Landing system modular con secciones configurables, A/B testing y analítica completa.",
-        "result": "3x en tasa de captura. 40% menos en costo por adquisición."
       }
     }
   },

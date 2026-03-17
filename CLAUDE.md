@@ -182,20 +182,25 @@ All CDN images route through `cdnAssetUrl(path)`:
 
 ## Work Section Architecture
 
-The homepage Work section (`portfolio-section.tsx`) uses a **scroll-driven editorial gallery** — a single immersive experience that replaces the old hero+cards layout.
+The homepage Work section (`portfolio-section.tsx`) is a **single immersive scroll-driven gallery** — the only Work experience on the homepage. The old static grid/cards layout is fully deprecated and removed.
 
 ### Key principles
 - Homepage work **prioritizes internal case study pages** (`/work/[slug]`) over external links
-- **No fake CTAs** — if no `detailPageSlug` exists, the CTA is absent
-- Use real project media from CDN; generated placeholders are editorial, not filler
-- **Enterprise vs People** is a strategic curation layer, not a filter
-- Presentation architecture > content completeness during mockup phases
+- **No fake CTAs** — if no `detailPageSlug` exists, falls back to `liveUrl` or no CTA
+- **Real project media from CDN** is always preferred over generated placeholders
+- **Enterprise vs People** is an editorial curation layer, not a fake filter
+- **Huge** is used as an interaction reference, not copied literally — Dreeeams visual identity takes precedence
+- Do NOT add fake projects (e.g. "Startup MVP", "DTC Landing") — only real client work with real assets
 
 ### Scroll-driven gallery (`scroll-gallery.tsx`)
 - Tall wrapper (`N × 100vh`) with a **sticky inner container** (`100vh`)
 - Framer Motion `useScroll` + `useTransform` + `useSpring` — no scroll hijacking
-- Each panel cross-fades via per-slide opacity + subtle y-translate
-- Panel layout: counter, segment badge, 9xl title, impact line, hero image, CTA
+- **Image-dominant panels**: hero image fills ~60% of viewport, title sits below
+- **Image scale animation**: enters at `1.08`, settles to `1.0` (subtle Ken Burns)
+- **Staggered text entrance**: title appears after image, impact line after title
+- **Scroll-reactive counter**: `01 / 03` updates as user scrolls (global, not per-panel)
+- **Progress bar**: thin `h-px` line at bottom that fills with scroll progress
+- **Typographic fallback**: when no image exists, massive watermark text replaces grid-line placeholder
 - Projects curated via `galleryOrder` field on each `Project`
 
 ### Component ownership
@@ -205,10 +210,17 @@ The homepage Work section (`portfolio-section.tsx`) uses a **scroll-driven edito
 - `project-card.tsx` — **deprecated** (no longer imported anywhere)
 
 ### Data model
-- `segment: 'enterprise' | 'people'` — strategic curation layer
+- `segment: 'enterprise' | 'people'` — editorial curation layer
 - `galleryOrder?: number` — inclusion + ordering in homepage gallery
 - `galleryBg?: string` — per-project dark background tone
 - `getGalleryProjects()` in `lib/portfolio.ts` — filters/sorts by galleryOrder
+
+### Current gallery roster
+| # | Project | Segment | Asset |
+|---|---------|---------|-------|
+| 1 | Hunt Tickets | Enterprise | `hunt_mockup.png` (CDN) |
+| 2 | Perro Negro | Enterprise | `mockup_perro_negro.png` (CDN) |
+| 3 | María Helena Amador | People | `mockup_mha.png` (CDN, via mockupUrl) |
 
 ---
 

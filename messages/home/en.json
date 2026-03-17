@@ -457,20 +457,6 @@
           "Event analytics dashboard",
           "Push notification system"
         ]
-      },
-      "startupMvp": {
-        "description": "SaaS MVP for a workforce management startup. Shipped in 6 weeks from zero to production.",
-        "impactLine": "SaaS MVP shipped in 6 weeks. Secured seed round with working product.",
-        "problem": "Founders needed to validate their idea before raising, with no technical team.",
-        "solution": "Full-stack MVP with auth, dashboards, and Stripe billing. Built on Next.js + Supabase.",
-        "result": "Launched in 6 weeks. Secured seed round based on working product."
-      },
-      "ecommerceLanding": {
-        "description": "Conversion-focused landing system for a DTC brand. 3x lead capture vs. previous site.",
-        "impactLine": "Landing system for a DTC brand. 3x lead capture rate.",
-        "problem": "A DTC brand was driving paid traffic to a generic Shopify page. Low conversion, no measurement.",
-        "solution": "Custom landing system with modular sections, A/B testing, and full analytics integration.",
-        "result": "3x lead capture rate. 40% lower cost per acquisition."
       }
     }
   },
