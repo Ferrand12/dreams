@@ -187,7 +187,6 @@ export const projects: Project[] = [
     proofType: 'metrics',
     editorialStateOverride: 'published',
     detailPageSlug: 'perro-negro',
-    heroImage: 'mockup_perro_negro.png',
     mockupUrl: '/images/mockup_perro_negro.png',
     impactLineKey: 'projects.perroNegro.impactLine',
     problemKey: 'projects.perroNegro.problem',
