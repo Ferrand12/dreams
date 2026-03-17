@@ -7,6 +7,8 @@ import { getGalleryProjects, type EnrichedProject } from '@/lib/portfolio';
 import { cn } from '@/lib/utils';
 
 // ── Editorial Gallery — image-dominant, minimal chrome ──
+// Subtraction pass: removed segment badges, category labels, tag pills.
+// Image rendering unchanged from working state.
 
 export function ScrollGallery() {
   const t = useTranslations('portfolio');
@@ -47,11 +49,11 @@ function panelTheme(project: EnrichedProject) {
 function imageMaxWidth(project: EnrichedProject) {
   switch (project.galleryImageSize) {
     case 'full':
-      return 'w-full';
-    case 'large':
       return 'max-w-7xl';
-    default:
+    case 'large':
       return 'max-w-6xl';
+    default:
+      return 'max-w-5xl';
   }
 }
 
@@ -72,7 +74,6 @@ function GalleryPanel({
   const theme = panelTheme(project);
   const imgSize = imageMaxWidth(project);
   const heroSrc = project.galleryImage || project.imageSrc;
-  const isLogoLed = !!project.galleryImage;
 
   const href = project.detailPageSlug
     ? `/${locale}/work/${project.detailPageSlug}`
@@ -100,19 +101,10 @@ function GalleryPanel({
         </span>
       </div>
 
-      {/* Hero visual */}
-      <div className="flex-1 flex items-center justify-center px-4 md:px-8 lg:px-12 py-4 md:py-6">
-        <div className={cn('relative w-full min-h-[55vh] md:min-h-[60vh]', imgSize)}>
-          {isLogoLed ? (
-            <LogoLockup
-              src={heroSrc}
-              alt={project.titleKey}
-              categoryLabel={t(`categories.${project.categoryKey}`)}
-              theme={theme}
-            />
-          ) : (
-            <SlideImage src={heroSrc} alt={project.titleKey} isLight={theme.isLight} />
-          )}
+      {/* Hero image — same container that was working */}
+      <div className="flex-1 flex items-center justify-center px-4 md:px-10 lg:px-16 py-6 md:py-8">
+        <div className={cn('relative w-full aspect-[16/10] md:aspect-[16/9]', imgSize)}>
+          <SlideImage src={heroSrc} alt={project.titleKey} isLight={theme.isLight} />
         </div>
       </div>
 
@@ -151,38 +143,6 @@ function GalleryPanel({
           </Link>
         )}
       </div>
-    </div>
-  );
-}
-
-// ── Logo Lockup — branded composition for logo-led panels ──
-
-function LogoLockup({
-  src,
-  alt,
-  categoryLabel,
-  theme,
-}: {
-  src: string;
-  alt: string;
-  categoryLabel: string;
-  theme: ReturnType<typeof panelTheme>;
-}) {
-  return (
-    <div className="relative w-full h-full flex flex-col items-center justify-center gap-6">
-      <div className="relative w-full max-w-md md:max-w-2xl lg:max-w-3xl aspect-[4/1]">
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          sizes="(max-width: 768px) 90vw, 700px"
-          className="object-contain"
-          quality={90}
-        />
-      </div>
-      <span className={cn('text-[9px] font-mono tracking-[0.35em] uppercase', theme.textMuted)}>
-        {categoryLabel}
-      </span>
     </div>
   );
 }
