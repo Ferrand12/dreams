@@ -43,8 +43,8 @@ export function ScrollGallery() {
   });
 
   return (
-    <div ref={wrapperRef} style={{ height: `${count * 100}vh` }}>
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+    <div ref={wrapperRef} className="bg-[#0A0A0A]" style={{ height: `${count * 100}vh` }}>
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#0A0A0A]">
         {/* Panels */}
         {projects.map((project, i) => (
           <GalleryPanel
