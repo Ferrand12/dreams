@@ -368,6 +368,12 @@
       "preview": "Preview",
       "comingSoon": "Coming soon"
     },
+    "gallery": {
+      "title": "Enterprise systems. People products.",
+      "subtitle": "We solve hard problems for companies and for the people behind them.",
+      "enterprise": "Enterprise",
+      "people": "People"
+    },
     "states": {
       "comingSoon": "Coming soon",
       "preview": "Preview"

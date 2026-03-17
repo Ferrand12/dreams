@@ -89,6 +89,23 @@ export function getFeaturedProjects(): EnrichedProject[] {
     .filter((p) => p.contentState !== 'internal');
 }
 
+// ── Gallery Projects (fullscreen homepage reel) ──
+
+export function getGalleryProjects(): EnrichedProject[] {
+  return projects
+    .filter((p) => p.galleryOrder !== undefined)
+    .sort((a, b) => (a.galleryOrder ?? 99) - (b.galleryOrder ?? 99))
+    .map((p) => {
+      const contentState = deriveContentState(p);
+      return {
+        ...p,
+        contentState,
+        cta: resolveCTA(p, contentState),
+        imageSrc: resolveImageSrc(p),
+      };
+    });
+}
+
 // ── Single Project Lookup ──
 
 export function getProjectBySlug(slug: string): EnrichedProject | null {
@@ -134,6 +151,9 @@ export const projects: Project[] = [
     categoryKey: 'mobileApp',
     tags: ['React Native', 'TypeScript', 'Firebase'],
     featured: true,
+    segment: 'enterprise',
+    galleryOrder: 1,
+    galleryBg: '#121212',
     teaserVariant: 'hero',
     order: 1,
     bgTheme: 'dark',
@@ -158,6 +178,9 @@ export const projects: Project[] = [
     categoryKey: 'webPlatform',
     tags: ['Next.js', 'Stripe', 'PostgreSQL'],
     featured: true,
+    segment: 'enterprise',
+    galleryOrder: 2,
+    galleryBg: '#141820',
     teaserVariant: 'standard',
     order: 2,
     bgTheme: 'light',
@@ -180,6 +203,7 @@ export const projects: Project[] = [
     categoryKey: 'tourismPlatform',
     tags: ['Next.js', 'Tailwind', 'Supabase'],
     featured: true,
+    segment: 'enterprise',
     teaserVariant: 'standard',
     order: 3,
     bgTheme: 'dark',
@@ -195,6 +219,7 @@ export const projects: Project[] = [
     categoryKey: 'brandSite',
     tags: ['Next.js', 'Stripe', 'PostgreSQL'],
     featured: false,
+    segment: 'people',
     proofType: 'visual',
     mockupUrl: 'https://eeyjhkhrdoouapuilwep.supabase.co/storage/v1/object/public/content/mockup_mha.png',
     impactLineKey: 'projects.mariaHelena.impactLine',
@@ -206,6 +231,9 @@ export const projects: Project[] = [
     categoryKey: 'saasProduct',
     tags: ['Next.js', 'Supabase', 'Stripe'],
     featured: false,
+    segment: 'people',
+    galleryOrder: 3,
+    galleryBg: '#181418',
     proofType: 'narrative',
     impactLineKey: 'projects.startupMvp.impactLine',
     problemKey: 'projects.startupMvp.problem',
@@ -218,6 +246,9 @@ export const projects: Project[] = [
     categoryKey: 'ecommerce',
     tags: ['Next.js', 'Tailwind', 'Analytics'],
     featured: false,
+    segment: 'people',
+    galleryOrder: 4,
+    galleryBg: '#101814',
     proofType: 'narrative',
     impactLineKey: 'projects.ecommerceLanding.impactLine',
     problemKey: 'projects.ecommerceLanding.problem',

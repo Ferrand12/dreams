@@ -368,6 +368,12 @@
       "preview": "Vista previa",
       "comingSoon": "Próximamente"
     },
+    "gallery": {
+      "title": "Sistemas enterprise. Productos para personas.",
+      "subtitle": "Resolvemos problemas complejos para compañías y para las personas detrás de ellas.",
+      "enterprise": "Enterprise",
+      "people": "Personas"
+    },
     "states": {
       "comingSoon": "Próximamente",
       "preview": "Vista previa"

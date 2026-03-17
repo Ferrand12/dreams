@@ -4,6 +4,7 @@ import { m } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { getFeaturedProjects } from '@/lib/portfolio';
 import { FeaturedCase } from '@/components/sections/portfolio/featured-case';
+import { WorkGallery } from '@/components/sections/portfolio/work-gallery';
 
 export default function PortfolioSection() {
   const t = useTranslations('portfolio');
@@ -67,6 +68,9 @@ export default function PortfolioSection() {
           </div>
         )}
       </div>
+
+      {/* Fullscreen work gallery — Huge-style scroll-snap panels */}
+      <WorkGallery />
     </section>
   );
 }

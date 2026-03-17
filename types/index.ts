@@ -138,12 +138,17 @@ export type Project = {
 
   // Editorial decisions (set by human, not derived)
   featured: boolean;
+  segment?: 'enterprise' | 'people';
   teaserVariant?: TeaserVariant;
   order?: number;
   bgTheme?: BgTheme;
   proofType?: ProofType;
   editorialStateOverride?: ContentState;
   ctaOverride?: ProjectCTA;
+
+  // Gallery (fullscreen work reel on homepage)
+  galleryOrder?: number;
+  galleryBg?: string;
 
   // Visual (progressive — add as assets become available)
   heroImage?: string;
