@@ -180,6 +180,38 @@ All CDN images route through `cdnAssetUrl(path)`:
 
 ---
 
+## Work Section Architecture
+
+The homepage Work section (`portfolio-section.tsx`) uses a **scroll-driven editorial gallery** — a single immersive experience that replaces the old hero+cards layout.
+
+### Key principles
+- Homepage work **prioritizes internal case study pages** (`/work/[slug]`) over external links
+- **No fake CTAs** — if no `detailPageSlug` exists, the CTA is absent
+- Use real project media from CDN; generated placeholders are editorial, not filler
+- **Enterprise vs People** is a strategic curation layer, not a filter
+- Presentation architecture > content completeness during mockup phases
+
+### Scroll-driven gallery (`scroll-gallery.tsx`)
+- Tall wrapper (`N × 100vh`) with a **sticky inner container** (`100vh`)
+- Framer Motion `useScroll` + `useTransform` + `useSpring` — no scroll hijacking
+- Each panel cross-fades via per-slide opacity + subtle y-translate
+- Panel layout: counter, segment badge, 9xl title, impact line, hero image, CTA
+- Projects curated via `galleryOrder` field on each `Project`
+
+### Component ownership
+- `scroll-gallery.tsx` — homepage scroll-driven gallery (the Work section)
+- `featured-case.tsx` — retained for case study detail pages, **not used on homepage**
+- `work-gallery.tsx` — **deleted** (replaced by scroll-gallery)
+- `project-card.tsx` — **deprecated** (no longer imported anywhere)
+
+### Data model
+- `segment: 'enterprise' | 'people'` — strategic curation layer
+- `galleryOrder?: number` — inclusion + ordering in homepage gallery
+- `galleryBg?: string` — per-project dark background tone
+- `getGalleryProjects()` in `lib/portfolio.ts` — filters/sorts by galleryOrder
+
+---
+
 ## Current Priorities
 
 1. **Improve conversion copy** - Sharpen headings, CTAs, and microcopy across the fit-check flow
@@ -192,13 +224,20 @@ All CDN images route through `cdnAssetUrl(path)`:
 ## Key File Paths
 
 ```
-app/[locale]/start/page.tsx          # Start page (server)
-app/[locale]/start/start-flow.tsx    # Fit-check flow (client)
-app/[locale]/thank-you/page.tsx      # Thank-you page
-app/[locale]/contact-form/page.tsx   # Redirect to /start
-components/contact/calendar-embed.tsx # Cal.com inline embed
-lib/constants.ts                     # Centralized constants
-messages/pages/start/en.json         # EN copy
-messages/pages/start/es.json         # ES copy
-.env.example                         # Env var template
+app/[locale]/start/page.tsx                        # Start page (server)
+app/[locale]/start/start-flow.tsx                  # Fit-check flow (client)
+app/[locale]/thank-you/page.tsx                    # Thank-you page
+app/[locale]/work/[slug]/page.tsx                  # Case study page (server)
+components/sections/portfolio-section.tsx           # Homepage Work section wrapper
+components/sections/portfolio/scroll-gallery.tsx    # Scroll-driven editorial gallery
+components/sections/portfolio/featured-case.tsx     # Case study detail page teasers
+components/sections/case-study/case-study-page.tsx  # Case study template
+components/contact/calendar-embed.tsx               # Cal.com inline embed
+lib/portfolio.ts                                    # Project registry + helpers
+lib/constants.ts                                    # Centralized constants
+messages/home/en.json                               # Homepage EN copy
+messages/home/es.json                               # Homepage ES copy
+messages/pages/work/en.json                         # Case study EN labels
+messages/pages/work/es.json                         # Case study ES labels
+.env.example                                        # Env var template
 ```
