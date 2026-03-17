@@ -1,6 +1,6 @@
 'use client';
 
-import { m, AnimatePresence } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -10,6 +10,8 @@ import { useScrollPosition } from '@/lib/hooks';
 import MobileMenu from '@/components/navigation/mobile-menu';
 import DesktopNav from '@/components/navigation/desktop-nav';
 
+const TRACKED_SECTIONS = ['services', 'work'] as const;
+
 export default function Navigation() {
   const t = useTranslations('nav');
   const locale = useLocale();
@@ -17,37 +19,58 @@ export default function Navigation() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [activeSection, setActiveSection] = useState('');
   const lastScrollY = useRef(0);
   const { isAtTop } = useScrollPosition();
 
-  // Check if current page is contact/start page (hide CTA on these)
   const isContactPage = pathname.includes('/contact') || pathname.includes('/start');
 
-  // Force scroll to top on locale change to prevent jumping
+  // Force scroll to top on locale change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [locale]);
 
-  // Handle scroll behavior - hide on scroll down, show on scroll up
+  // Hide on scroll down, show on scroll up
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      // Show navbar when scrolling up, hide when scrolling down
       if (currentScrollY < lastScrollY.current) {
-        // Scrolling up
         setIsVisible(true);
       } else if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-        // Scrolling down and past 100px threshold
         setIsVisible(false);
       }
-
       lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Active section detection via IntersectionObserver
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        }
+      },
+      { rootMargin: '-30% 0px -50% 0px', threshold: 0 }
+    );
+
+    TRACKED_SECTIONS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Clear active section when at top of page
+  useEffect(() => {
+    if (isAtTop) setActiveSection('');
+  }, [isAtTop]);
 
   const toggleLanguage = () => {
     const newLocale = locale === 'en' ? 'es' : 'en';
@@ -144,6 +167,7 @@ export default function Navigation() {
                 aboutLabel={t('about')}
                 getStartedLabel={t('getStarted')}
                 isContactPage={isContactPage}
+                activeSection={activeSection}
               />
 
               {/* Mobile Menu Button */}

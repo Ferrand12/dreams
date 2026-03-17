@@ -3,6 +3,7 @@
 import { m, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import Logo from '@/components/logo';
+import { smoothScrollTo } from '@/lib/smooth-scroll';
 
 interface MenuItem {
   label: string;
@@ -21,10 +22,8 @@ export default function MobileMenu({ isOpen, onClose, menuItems }: MobileMenuPro
   const handleMenuClick = (href: string) => {
     onClose();
     if (href.startsWith('#')) {
-      const el = document.querySelector(href);
-      if (el) {
-        setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 300);
-      }
+      // Wait for menu close animation, then smooth scroll via Lenis
+      setTimeout(() => smoothScrollTo(href), 450);
     } else {
       setTimeout(() => router.push(href), 300);
     }

@@ -68,7 +68,8 @@
   }
 
   html {
-    /* scroll-behavior removed - using Lenis for smooth scroll */
+    /* scroll-behavior removed — using Lenis for smooth scroll */
+    scroll-padding-top: 96px; /* offset for fixed navbar */
     overflow-x: hidden;
     width: 100%;
     scrollbar-width: none; /* Firefox */

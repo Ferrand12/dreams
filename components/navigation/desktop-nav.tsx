@@ -1,6 +1,7 @@
 'use client';
 
-import { m, AnimatePresence } from 'framer-motion';
+import { m } from 'framer-motion';
+import { smoothScrollTo } from '@/lib/smooth-scroll';
 
 interface DesktopNavProps {
   isAtTop: boolean;
@@ -10,38 +11,75 @@ interface DesktopNavProps {
   aboutLabel: string;
   getStartedLabel: string;
   isContactPage: boolean;
+  activeSection: string;
 }
 
-export default function DesktopNav({ isAtTop, isVisible, servicesLabel, portfolioLabel, aboutLabel, getStartedLabel, isContactPage }: DesktopNavProps) {
-  const linkClass = `md:block hidden px-4 py-2 text-sm font-medium border transition-fast ${
-    isAtTop
-      ? 'text-white border-overlay-border-medium hover:bg-white hover:text-black'
-      : 'text-foreground-light border-black/10 hover:border-black hover:text-white hover:bg-black'
-  }`;
+const sectionLinks = [
+  { key: 'services', target: '#services' },
+  { key: 'work', target: '#work' },
+] as const;
+
+export default function DesktopNav({
+  isAtTop,
+  isVisible,
+  servicesLabel,
+  portfolioLabel,
+  aboutLabel,
+  getStartedLabel,
+  isContactPage,
+  activeSection,
+}: DesktopNavProps) {
+  const labels: Record<string, string> = {
+    services: servicesLabel,
+    work: portfolioLabel,
+  };
 
   return (
     <>
-      <m.a whileTap={{ scale: 0.98 }} href="#services" className={linkClass}>
-        {servicesLabel}
-      </m.a>
+      {/* Section links — smooth scroll with active state */}
+      {sectionLinks.map(({ key, target }) => {
+        const isActive = activeSection === key;
+        return (
+          <button
+            key={key}
+            onClick={() => smoothScrollTo(target)}
+            className={`hidden md:block px-3 py-2 text-sm font-medium transition-colors duration-200 ${
+              isAtTop
+                ? isActive
+                  ? 'text-white'
+                  : 'text-white/50 hover:text-white'
+                : isActive
+                  ? 'text-foreground-light'
+                  : 'text-foreground-light/40 hover:text-foreground-light'
+            }`}
+          >
+            {labels[key]}
+          </button>
+        );
+      })}
 
-      <m.a whileTap={{ scale: 0.98 }} href="#work" className={linkClass}>
-        {portfolioLabel}
-      </m.a>
-
-      <m.a whileTap={{ scale: 0.98 }} href="/about" className={linkClass}>
+      {/* About — route link, not anchor */}
+      <m.a
+        whileTap={{ scale: 0.98 }}
+        href="/about"
+        className={`hidden md:block px-3 py-2 text-sm font-medium transition-colors duration-200 ${
+          isAtTop
+            ? 'text-white/50 hover:text-white'
+            : 'text-foreground-light/40 hover:text-foreground-light'
+        }`}
+      >
         {aboutLabel}
       </m.a>
 
-      {/* CTA Button - Desktop only */}
+      {/* CTA */}
       {isVisible && !isContactPage && (
         <m.a
           layoutId="get-started-button"
           whileTap={{ scale: 0.98 }}
           href="/start"
-          className={`hidden md:block px-4 py-2 text-sm font-medium border transition-fast ${
+          className={`hidden md:block px-4 py-2 text-sm font-medium border transition-[color,background-color,border-color] duration-200 ${
             isAtTop
-              ? 'text-black bg-white border-overlay-border-medium hover:bg-surface-light-1'
+              ? 'text-black bg-white border-white/20 hover:bg-surface-light-1'
               : 'text-white bg-black hover:bg-brand-hover border-black hover:border-brand-hover'
           }`}
         >

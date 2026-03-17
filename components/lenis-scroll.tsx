@@ -16,6 +16,9 @@ export default function LenisScroll() {
       infinite: false,
     });
 
+    // Expose for programmatic smooth scroll (nav links, etc.)
+    (window as unknown as { __lenis: Lenis }).__lenis = lenis;
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -25,6 +28,7 @@ export default function LenisScroll() {
 
     return () => {
       lenis.destroy();
+      delete (window as unknown as Record<string, unknown>).__lenis;
     };
   }, []);
 
