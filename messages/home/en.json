@@ -87,7 +87,7 @@
       "hero": {
         "h1": "Interfaces that turn traffic into leads.",
         "h2Prefix": "Built for",
-        "flipWords": ["UX", "Performance", "Analytics"],
+        "flipWords": ["Conversion", "Performance", "Clarity"],
         "microline": "Everything measurable. Everything optimizable."
       },
       "problem": {
@@ -182,7 +182,7 @@
       "hero": {
         "h1": "Backend systems that power real growth.",
         "h2Prefix": "Built for",
-        "flipWords": ["APIs", "Security", "Scale"],
+        "flipWords": ["Scale", "Security", "Speed"],
         "microline": "Robust. Secure. Production-ready."
       },
       "problem": {
@@ -275,7 +275,7 @@
       "hero": {
         "h1": "Systems that multiply your operational capacity.",
         "h2Prefix": "Built for",
-        "flipWords": ["Automation", "Intelligence", "Efficiency"],
+        "flipWords": ["Automation", "Efficiency", "Leverage"],
         "microline": "Less manual work. More strategic leverage."
       },
       "problem": {
