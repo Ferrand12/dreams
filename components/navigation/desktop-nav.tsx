@@ -1,6 +1,5 @@
 'use client';
 
-import { m } from 'framer-motion';
 import { smoothScrollTo } from '@/lib/smooth-scroll';
 
 interface DesktopNavProps {
@@ -21,7 +20,6 @@ const sectionLinks = [
 
 export default function DesktopNav({
   isAtTop,
-  isVisible,
   servicesLabel,
   portfolioLabel,
   aboutLabel,
@@ -58,9 +56,8 @@ export default function DesktopNav({
         );
       })}
 
-      {/* About — route link, not anchor */}
-      <m.a
-        whileTap={{ scale: 0.98 }}
+      {/* About — route link */}
+      <a
         href="/about"
         className={`hidden md:block px-3 py-2 text-sm font-medium transition-colors duration-200 ${
           isAtTop
@@ -69,22 +66,21 @@ export default function DesktopNav({
         }`}
       >
         {aboutLabel}
-      </m.a>
+      </a>
 
-      {/* CTA */}
-      {isVisible && !isContactPage && (
-        <m.a
-          layoutId="get-started-button"
-          whileTap={{ scale: 0.98 }}
+      {/* CTA — primary action */}
+      {!isContactPage && (
+        <a
           href="/start"
-          className={`hidden md:block px-4 py-2 text-sm font-medium border transition-[color,background-color,border-color] duration-200 ${
+          className={`hidden md:block px-5 py-2 text-sm font-medium border group transition-[color,background-color,border-color] duration-200 ${
             isAtTop
-              ? 'text-black bg-white border-white/20 hover:bg-surface-light-1'
-              : 'text-white bg-black hover:bg-brand-hover border-black hover:border-brand-hover'
+              ? 'text-[#1E1E1E] bg-white border-white hover:bg-[#DEE5ED]'
+              : 'text-white bg-[#1E1E1E] border-[#1E1E1E] hover:bg-[#333]'
           }`}
         >
-          {getStartedLabel} →
-        </m.a>
+          {getStartedLabel}
+          <span className="inline-block ml-1.5 transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+        </a>
       )}
     </>
   );

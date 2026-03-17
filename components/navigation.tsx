@@ -205,18 +205,6 @@ export default function Navigation() {
         </div>
       </m.nav>
 
-      {/* Fixed Contact Button - Visible when header is hidden */}
-      {!isVisible && !isContactPage && (
-        <m.a
-          layoutId="get-started-button"
-          href="/start"
-          whileTap={{ scale: 0.98 }}
-          className="block fixed top-4 sm:top-5 right-4 sm:right-6 md:right-[calc((100vw-80rem)/2+1.5rem)] z-[60] px-5 py-2.5 sm:px-4 sm:py-2 text-sm font-medium text-white bg-black hover:bg-brand-hover border border-black hover:border-brand-hover transition-fast"
-        >
-          {t('getStarted')} →
-        </m.a>
-      )}
-
       {/* Full Screen Mobile Menu */}
       <MobileMenu
         isOpen={isMenuOpen}
