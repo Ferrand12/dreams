@@ -44,7 +44,10 @@ export function ScrollGallery() {
   );
 }
 
-// ── Animated Panel — scroll-linked entrance + image scale ──
+// ── Animated Panel — slide-up reveal + Ken Burns ──
+// No opacity animation — panels stay fully opaque.
+// Incoming panels slide up from y:100% to y:0%, covering the previous one.
+// overflow-hidden on the sticky container clips off-screen panels.
 
 function AnimatedPanel({
   project,
@@ -68,32 +71,15 @@ function AnimatedPanel({
   const rawScale = useTransform(progress, [boundary, panelEnd], [1.05, 1.0]);
   const scale = useSpring(rawScale, SPRING);
 
-  // Panel 0: always visible (input range before 0, so values stay constant)
-  // Panels 1+: slide up from y:60 + fade in from opacity:0
-  const rawOpacity = useTransform(
+  // Slide-up reveal: panel 0 static, panels 1+ slide from 100% to 0%
+  const y = useTransform(
     progress,
     index === 0 ? [-1, 0] : [boundary - TW, boundary + TW],
-    index === 0 ? [1, 1] : [0, 1],
+    index === 0 ? ['0%', '0%'] : ['100%', '0%'],
   );
-  const rawY = useTransform(
-    progress,
-    index === 0 ? [-1, 0] : [boundary - TW, boundary + TW],
-    index === 0 ? [0, 0] : [60, 0],
-  );
-  const opacity = useSpring(rawOpacity, SPRING);
-  const y = useSpring(rawY, SPRING);
-
-  // Active panel gets z-index 10 for pointer events
-  const zIndex = useTransform(progress, (p) => {
-    const active = Math.min(Math.floor(p * total + 0.5), total - 1);
-    return active === index ? 10 : index;
-  });
 
   return (
-    <m.div
-      className="absolute inset-0"
-      style={{ opacity, y, zIndex }}
-    >
+    <m.div className="absolute inset-0" style={{ y }}>
       <GalleryPanel
         project={project}
         index={index}
