@@ -1,34 +1,107 @@
 'use client';
 
+import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { m, useScroll, useTransform, useSpring, type MotionValue } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
 import { getGalleryProjects, type EnrichedProject } from '@/lib/portfolio';
 import { cn } from '@/lib/utils';
 
-// ── Editorial Gallery — image-dominant, minimal chrome ──
-// Subtraction pass: removed segment badges, category labels, tag pills.
-// Image rendering unchanged from working state.
+// ── Scroll-driven editorial gallery ──
+// Tall wrapper (N × 100vh) + sticky stage (100vh) + absolute panels.
+// Incoming panels slide up + fade in on top of the previous one.
+// Panel 0 is always visible (base). No cross-fade opacity math needed.
+
+const TW = 0.08; // transition width — 8% of total scroll per handoff
+const SPRING = { stiffness: 300, damping: 40 }; // overdamped — no bounce
 
 export function ScrollGallery() {
   const t = useTranslations('portfolio');
   const locale = useLocale();
   const projects = getGalleryProjects();
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref });
 
   if (projects.length === 0) return null;
 
   return (
-    <div>
-      {projects.map((project, i) => (
-        <GalleryPanel
-          key={project.slug}
-          project={project}
-          index={i}
-          locale={locale}
-          t={t}
-        />
-      ))}
+    <div ref={ref} style={{ height: `${projects.length * 100}vh` }}>
+      <div className="sticky top-0 h-screen overflow-hidden bg-[#0A0A0A]">
+        {projects.map((project, i) => (
+          <AnimatedPanel
+            key={project.slug}
+            project={project}
+            index={i}
+            total={projects.length}
+            locale={locale}
+            t={t}
+            progress={scrollYProgress}
+          />
+        ))}
+      </div>
     </div>
+  );
+}
+
+// ── Animated Panel — scroll-linked entrance + image scale ──
+
+function AnimatedPanel({
+  project,
+  index,
+  total,
+  locale,
+  t,
+  progress,
+}: {
+  project: EnrichedProject;
+  index: number;
+  total: number;
+  locale: string;
+  t: ReturnType<typeof useTranslations>;
+  progress: MotionValue<number>;
+}) {
+  const boundary = index / total;
+  const panelEnd = (index + 1) / total;
+
+  // Subtle Ken Burns: 1.05 → 1.0 over this panel's scroll range
+  const rawScale = useTransform(progress, [boundary, panelEnd], [1.05, 1.0]);
+  const scale = useSpring(rawScale, SPRING);
+
+  // Panel 0: always visible (input range before 0, so values stay constant)
+  // Panels 1+: slide up from y:60 + fade in from opacity:0
+  const rawOpacity = useTransform(
+    progress,
+    index === 0 ? [-1, 0] : [boundary - TW, boundary + TW],
+    index === 0 ? [1, 1] : [0, 1],
+  );
+  const rawY = useTransform(
+    progress,
+    index === 0 ? [-1, 0] : [boundary - TW, boundary + TW],
+    index === 0 ? [0, 0] : [60, 0],
+  );
+  const opacity = useSpring(rawOpacity, SPRING);
+  const y = useSpring(rawY, SPRING);
+
+  // Active panel gets z-index 10 for pointer events
+  const zIndex = useTransform(progress, (p) => {
+    const active = Math.min(Math.floor(p * total + 0.5), total - 1);
+    return active === index ? 10 : index;
+  });
+
+  return (
+    <m.div
+      className="absolute inset-0"
+      style={{ opacity, y, zIndex }}
+    >
+      <GalleryPanel
+        project={project}
+        index={index}
+        locale={locale}
+        t={t}
+        imageScale={scale}
+      />
+    </m.div>
   );
 }
 
@@ -57,18 +130,20 @@ function imageMaxWidth(project: EnrichedProject) {
   }
 }
 
-// ── Gallery Panel ──
+// ── Gallery Panel — unchanged from working state ──
 
 function GalleryPanel({
   project,
   index,
   locale,
   t,
+  imageScale,
 }: {
   project: EnrichedProject;
   index: number;
   locale: string;
   t: ReturnType<typeof useTranslations>;
+  imageScale?: MotionValue<number>;
 }) {
   const bg = project.galleryBg || '#121212';
   const theme = panelTheme(project);
@@ -91,7 +166,7 @@ function GalleryPanel({
 
   return (
     <div
-      className="relative min-h-screen flex flex-col"
+      className="relative h-full flex flex-col"
       style={{ backgroundColor: bg }}
     >
       {/* Counter — editorial, secondary */}
@@ -104,7 +179,7 @@ function GalleryPanel({
       {/* Hero image — same container that was working */}
       <div className="flex-1 flex items-center justify-center px-4 md:px-10 lg:px-16 py-6 md:py-8">
         <div className={cn('relative w-full aspect-[16/10] md:aspect-[16/9]', imgSize)}>
-          <SlideImage src={heroSrc} alt={project.titleKey} isLight={theme.isLight} />
+          <SlideImage src={heroSrc} alt={project.titleKey} isLight={theme.isLight} scale={imageScale} />
         </div>
       </div>
 
@@ -147,20 +222,32 @@ function GalleryPanel({
   );
 }
 
-// ── Slide Image ──
+// ── Slide Image — with optional Ken Burns scale ──
 
-function SlideImage({ src, alt, isLight }: { src: string; alt: string; isLight: boolean }) {
+function SlideImage({
+  src,
+  alt,
+  isLight,
+  scale,
+}: {
+  src: string;
+  alt: string;
+  isLight: boolean;
+  scale?: MotionValue<number>;
+}) {
   if (src) {
     return (
       <div className="relative w-full h-full overflow-hidden">
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          sizes="(max-width: 768px) 100vw, 80vw"
-          className="object-contain"
-          quality={85}
-        />
+        <m.div className="relative w-full h-full" style={scale ? { scale } : undefined}>
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            sizes="(max-width: 768px) 100vw, 80vw"
+            className="object-contain"
+            quality={85}
+          />
+        </m.div>
       </div>
     );
   }
