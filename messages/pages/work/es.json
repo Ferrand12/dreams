@@ -7,8 +7,11 @@
     "sections": {
       "challenge": "El Desafío",
       "approach": "Nuestro Enfoque",
+      "build": "Lo Que Construimos",
       "outcome": "El Resultado",
+      "impact": "El Impacto",
       "deliverables": "Lo Que Entregamos",
+      "architecture": "Arquitectura",
       "gallery": "El Trabajo",
       "proof": "Resultados"
     },
