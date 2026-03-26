@@ -1,93 +1,35 @@
 'use client';
 
-import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { m, useScroll, useTransform, useSpring, type MotionValue } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
 import { getGalleryProjects, type EnrichedProject } from '@/lib/portfolio';
 import { cn } from '@/lib/utils';
 
-// ── Scroll-driven editorial gallery ──
-// Tall wrapper (N × 100vh) + sticky stage (100vh) + absolute panels.
-// Incoming panels slide up + fade in on top of the previous one.
-// Panel 0 is always visible (base). No cross-fade opacity math needed.
-
-const TW = 0.08; // transition width — 8% of total scroll per handoff
-const SPRING = { stiffness: 300, damping: 40 }; // overdamped — no bounce
+// ── Editorial Gallery — stacked panels + whileInView entrances ──
+// No sticky, no scroll tracking, no useTransform.
+// Panels stack naturally. Content animates in when scrolled into view.
 
 export function ScrollGallery() {
   const t = useTranslations('portfolio');
   const locale = useLocale();
   const projects = getGalleryProjects();
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref });
 
   if (projects.length === 0) return null;
 
   return (
-    <div ref={ref} style={{ height: `${projects.length * 100}vh` }}>
-      <div className="sticky top-0 h-screen overflow-hidden bg-[#0A0A0A]">
-        {projects.map((project, i) => (
-          <AnimatedPanel
-            key={project.slug}
-            project={project}
-            index={i}
-            total={projects.length}
-            locale={locale}
-            t={t}
-            progress={scrollYProgress}
-          />
-        ))}
-      </div>
+    <div>
+      {projects.map((project, i) => (
+        <GalleryPanel
+          key={project.slug}
+          project={project}
+          index={i}
+          locale={locale}
+          t={t}
+        />
+      ))}
     </div>
-  );
-}
-
-// ── Animated Panel — slide-up reveal + Ken Burns ──
-// No opacity animation — panels stay fully opaque.
-// Incoming panels slide up from y:100% to y:0%, covering the previous one.
-// overflow-hidden on the sticky container clips off-screen panels.
-
-function AnimatedPanel({
-  project,
-  index,
-  total,
-  locale,
-  t,
-  progress,
-}: {
-  project: EnrichedProject;
-  index: number;
-  total: number;
-  locale: string;
-  t: ReturnType<typeof useTranslations>;
-  progress: MotionValue<number>;
-}) {
-  const boundary = index / total;
-  const panelEnd = (index + 1) / total;
-
-  // Subtle Ken Burns: 1.05 → 1.0 over this panel's scroll range
-  const rawScale = useTransform(progress, [boundary, panelEnd], [1.05, 1.0]);
-  const scale = useSpring(rawScale, SPRING);
-
-  // Slide-up reveal: panel 0 static, panels 1+ slide from 100% to 0%
-  const y = useTransform(
-    progress,
-    index === 0 ? [-1, 0] : [boundary - TW, boundary + TW],
-    index === 0 ? ['0%', '0%'] : ['100%', '0%'],
-  );
-
-  return (
-    <m.div className="absolute inset-0" style={{ y }}>
-      <GalleryPanel
-        project={project}
-        index={index}
-        locale={locale}
-        t={t}
-        imageScale={scale}
-      />
-    </m.div>
   );
 }
 
@@ -116,20 +58,18 @@ function imageMaxWidth(project: EnrichedProject) {
   }
 }
 
-// ── Gallery Panel — unchanged from working state ──
+// ── Gallery Panel ──
 
 function GalleryPanel({
   project,
   index,
   locale,
   t,
-  imageScale,
 }: {
   project: EnrichedProject;
   index: number;
   locale: string;
   t: ReturnType<typeof useTranslations>;
-  imageScale?: MotionValue<number>;
 }) {
   const bg = project.galleryBg || '#121212';
   const theme = panelTheme(project);
@@ -152,7 +92,7 @@ function GalleryPanel({
 
   return (
     <div
-      className="relative h-full flex flex-col"
+      className="relative min-h-screen flex flex-col"
       style={{ backgroundColor: bg }}
     >
       {/* Counter — editorial, secondary */}
@@ -162,78 +102,91 @@ function GalleryPanel({
         </span>
       </div>
 
-      {/* Hero image — same container that was working */}
-      <div className="flex-1 flex items-center justify-center px-4 md:px-10 lg:px-16 py-6 md:py-8">
+      {/* Hero image — fade in + subtle scale */}
+      <m.div
+        className="flex-1 flex items-center justify-center px-4 md:px-10 lg:px-16 py-6 md:py-8"
+        initial={{ opacity: 0, scale: 1.04 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+      >
         <div className={cn('relative w-full aspect-[16/10] md:aspect-[16/9]', imgSize)}>
-          <SlideImage src={heroSrc} alt={project.titleKey} isLight={theme.isLight} scale={imageScale} />
+          <SlideImage src={heroSrc} alt={project.titleKey} isLight={theme.isLight} />
         </div>
-      </div>
+      </m.div>
 
       {/* Title + impact line + CTA */}
       <div className="px-8 md:px-14 lg:px-20 pb-8 md:pb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
         <div>
-          <h3 className={cn(
-            'font-nostalgic leading-[0.85] tracking-tighter',
-            theme.text,
-            project.galleryImageSize === 'full'
-              ? 'text-3xl sm:text-4xl md:text-5xl lg:text-6xl'
-              : 'text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl',
-          )}>
+          <m.h3
+            className={cn(
+              'font-nostalgic leading-[0.85] tracking-tighter',
+              theme.text,
+              project.galleryImageSize === 'full'
+                ? 'text-3xl sm:text-4xl md:text-5xl lg:text-6xl'
+                : 'text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl',
+            )}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15, ease: 'easeOut' }}
+          >
             {project.titleKey}
-          </h3>
+          </m.h3>
           {project.impactLineKey && (
-            <p className={cn('text-sm md:text-base mt-2 md:mt-3 max-w-lg font-light leading-relaxed', theme.textSecondary)}>
+            <m.p
+              className={cn('text-sm md:text-base mt-2 md:mt-3 max-w-lg font-light leading-relaxed', theme.textSecondary)}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
+            >
               {t(project.impactLineKey)}
-            </p>
+            </m.p>
           )}
         </div>
 
         {href && ctaLabel && (
-          <Link
-            href={href}
-            className={cn(
-              'text-xs font-mono tracking-[0.15em] transition-colors duration-300 whitespace-nowrap shrink-0',
-              theme.textCta,
-              theme.textCtaHover,
-            )}
-            {...(!project.detailPageSlug && project.liveUrl
-              ? { target: '_blank', rel: 'noopener noreferrer' }
-              : {})}
+          <m.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.4 }}
           >
-            {ctaLabel} &#8594;
-          </Link>
+            <Link
+              href={href}
+              className={cn(
+                'text-xs font-mono tracking-[0.15em] transition-colors duration-300 whitespace-nowrap shrink-0',
+                theme.textCta,
+                theme.textCtaHover,
+              )}
+              {...(!project.detailPageSlug && project.liveUrl
+                ? { target: '_blank', rel: 'noopener noreferrer' }
+                : {})}
+            >
+              {ctaLabel} &#8594;
+            </Link>
+          </m.div>
         )}
       </div>
     </div>
   );
 }
 
-// ── Slide Image — with optional Ken Burns scale ──
+// ── Slide Image ──
 
-function SlideImage({
-  src,
-  alt,
-  isLight,
-  scale,
-}: {
-  src: string;
-  alt: string;
-  isLight: boolean;
-  scale?: MotionValue<number>;
-}) {
+function SlideImage({ src, alt, isLight }: { src: string; alt: string; isLight: boolean }) {
   if (src) {
     return (
       <div className="relative w-full h-full overflow-hidden">
-        <m.div className="relative w-full h-full" style={scale ? { scale } : undefined}>
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            sizes="(max-width: 768px) 100vw, 80vw"
-            className="object-contain"
-            quality={85}
-          />
-        </m.div>
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes="(max-width: 768px) 100vw, 80vw"
+          className="object-contain"
+          quality={85}
+        />
       </div>
     );
   }
