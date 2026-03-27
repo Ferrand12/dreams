@@ -145,6 +145,7 @@ All site CTAs now point to `/start`:
 | `ADMIN_EMAIL` | Admin notification email |
 | `UPSTASH_REDIS_REST_URL` | Rate limiting (prod only, in-memory fallback in dev) |
 | `UPSTASH_REDIS_REST_TOKEN` | Rate limiting token |
+| `UPLOADTHING_TOKEN` | UploadThing API token for file uploads + CDN |
 
 ### Optional
 
@@ -156,15 +157,27 @@ All site CTAs now point to `/start`:
 
 ---
 
-## CDN Image Architecture
+## CDN Image Architecture (Dual-CDN)
 
-**`next.config.ts` — static hostname allowlist (not dynamic)**
-Next.js evaluates `next.config.ts` BEFORE loading `.env.local`, so `process.env.NEXT_PUBLIC_CDN_URL` is always `undefined` at config time. The Supabase hostname is hardcoded in `remotePatterns` with a scoped `pathname: '/storage/v1/object/public/**'`. Do NOT replace this with dynamic env parsing — it will silently fail.
+The project uses **two CDN providers** side by side:
 
-**`lib/constants.ts` — `cdnAssetUrl()` helper**
-All CDN images route through `cdnAssetUrl(path)`:
-- Returns `''` if `NEXT_PUBLIC_CDN_URL` is unset (graceful fallback, no crash)
-- Builds the full Supabase storage path: `${CDN_URL}/storage/v1/object/public/content/${path}`
+### Supabase CDN (legacy assets)
+- **Helper:** `cdnAssetUrl(path)` in `lib/constants.ts`
+- **Domain:** `eeyjhkhrdoouapuilwep.supabase.co` (hardcoded in `next.config.ts`)
+- **Assets:** `hunt_mockup.png`, `red_gradient.jpeg`, `green_gradient.jpeg`, `blue_gradient.jpeg`
+- Returns `''` if `NEXT_PUBLIC_CDN_URL` is unset (graceful fallback)
+
+### UploadThing CDN (new + future assets)
+- **Helper:** `utAssetUrl(key)` in `lib/constants.ts`
+- **Domain:** `njcx3bqt2s.ufs.sh` (hardcoded in `next.config.ts`)
+- **Assets:** `hunt_logo.png`, `mockup_perro_negro.png`, `mockup_mha.jpeg`, all future uploads
+- Takes a file key (from UploadThing upload response), returns full URL
+- Upload script: `scripts/upload-assets.ts` (run with `npx tsx scripts/upload-assets.ts`)
+
+### Rules
+- **New images** always go to UploadThing via `utAssetUrl()`
+- **Existing Supabase assets** stay on Supabase via `cdnAssetUrl()` — do NOT migrate
+- Both hostnames are statically hardcoded in `next.config.ts` `remotePatterns` — do NOT use dynamic env parsing
 - Components guard with `{src && <Image src={src} />}` — never pass empty/undefined to `next/image`
 
 ---
@@ -173,7 +186,7 @@ All CDN images route through `cdnAssetUrl(path)`:
 
 - **`middleware.ts`** - Do not modify. Handles locale routing and security headers.
 - **`next.config.ts` CSP** - Do not modify unless absolutely necessary.
-- **`next.config.ts` `remotePatterns`** - Supabase hostname MUST be static. Do not replace with dynamic `process.env` extraction — it evaluates before `.env.local` is loaded.
+- **`next.config.ts` `remotePatterns`** - Supabase and UploadThing hostnames MUST be static. Do not replace with dynamic `process.env` extraction — it evaluates before `.env.local` is loaded.
 - **API routes (`app/api/`)** - Do not touch. Contact form, health check, and CRM integration are stable.
 - **CRM integration** - Twenty CRM wiring is production-stable.
 - **Rate limiting** - Upstash Redis setup is production-stable.

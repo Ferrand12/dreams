@@ -37,6 +37,16 @@ const nextConfig: NextConfig = {
         hostname: 'eeyjhkhrdoouapuilwep.supabase.co',
         pathname: '/storage/v1/object/public/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'njcx3bqt2s.ufs.sh',
+        pathname: '/f/*',
+      },
+      {
+        protocol: 'https',
+        hostname: 'utfs.io',
+        pathname: '/f/*',
+      },
     ],
   },
   experimental: {

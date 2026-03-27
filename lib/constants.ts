@@ -33,15 +33,23 @@ export const SOCIAL_MEDIA = {
   WHATSAPP: process.env.NEXT_PUBLIC_WHATSAPP || '',
 } as const;
 
-// CDN
+// CDN — Supabase (existing assets)
 const CDN_BASE = process.env.NEXT_PUBLIC_CDN_URL || '';
 const CDN_CONTENT_PREFIX = CDN_BASE
   ? `${CDN_BASE}/storage/v1/object/public/content`
   : '';
 
-/** Build a full CDN asset URL. Returns empty string if CDN is not configured. */
+/** Build a full Supabase CDN asset URL. Returns empty string if CDN is not configured. */
 export function cdnAssetUrl(path: string): string {
   return CDN_CONTENT_PREFIX ? `${CDN_CONTENT_PREFIX}/${path}` : '';
+}
+
+// CDN — UploadThing (new uploads + future assets)
+const UT_CDN = 'https://njcx3bqt2s.ufs.sh/f';
+
+/** Build an UploadThing CDN URL from a file key. Returns empty string if key is empty. */
+export function utAssetUrl(key: string): string {
+  return key ? `${UT_CDN}/${key}` : '';
 }
 
 // Cal.com

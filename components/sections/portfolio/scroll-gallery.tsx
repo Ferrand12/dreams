@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { m } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
 import { getGalleryProjects, type EnrichedProject } from '@/lib/portfolio';
+import { utAssetUrl } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 
 // ── Editorial Gallery — stacked panels + whileInView entrances ──
@@ -74,7 +75,7 @@ function GalleryPanel({
   const bg = project.galleryBg || '#121212';
   const theme = panelTheme(project);
   const imgSize = imageMaxWidth(project);
-  const heroSrc = project.galleryImage || project.imageSrc;
+  const heroSrc = (project.galleryImage ? utAssetUrl(project.galleryImage) : '') || project.imageSrc;
 
   const href = project.detailPageSlug
     ? `/${locale}/work/${project.detailPageSlug}`
