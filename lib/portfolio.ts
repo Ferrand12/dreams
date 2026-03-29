@@ -1,5 +1,5 @@
 import type { Project, ContentState, ProjectCTA } from '@/types';
-import { cdnAssetUrl } from '@/lib/constants';
+import { cdnAssetUrl, utAssetUrl } from '@/lib/constants';
 
 // ── Content State Derivation ──
 
@@ -165,6 +165,13 @@ export const projects: Project[] = [
     detailPageSlug: 'hunt-tickets',
     heroImage: 'hunt_mockup.png',
     mockupUrl: 'https://eeyjhkhrdoouapuilwep.supabase.co/storage/v1/object/public/content/hunt_mockup.png',
+    galleryImages: [
+      '3o5p9iMXPbpYdi8PNuU1BmI9pOrGgnwTEfkuNZScWhAKX8R4', // hunt_home
+      '3o5p9iMXPbpYVCuULmi0XM146kGYQvxOotDdJ5SnFjqI7NuZ', // hunt_event_detail
+      '3o5p9iMXPbpYvirOvvcRkS3JPKt6E9iaqLZNQUeG4FupYA8c', // hunt_event_tickets
+      '3o5p9iMXPbpY0OBacyDlafsB2OhJ8NIAFebXPinyukm6wZ9d', // hunt_checkout
+      '3o5p9iMXPbpYLnQIlymHaT7wVJf6ZjcPQgz1etny2RBNXol9', // hunt_ticket_qr
+    ],
     impactLineKey: 'projects.huntTickets.impactLine',
     problemKey: 'projects.huntTickets.problem',
     solutionKey: 'projects.huntTickets.solution',

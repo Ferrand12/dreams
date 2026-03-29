@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
-import { cdnAssetUrl } from '@/lib/constants';
+import { utAssetUrl } from '@/lib/constants';
 import { fadeInUp, transitions } from '@/lib/motion-presets';
 import type { EnrichedProject } from '@/lib/portfolio';
 
@@ -259,7 +259,7 @@ function TheBuild({
     : [];
 
   const images = (project.galleryImages || [])
-    .map((img) => cdnAssetUrl(img) || img)
+    .map((img) => utAssetUrl(img) || img)
     .filter(Boolean);
 
   return (
@@ -288,24 +288,31 @@ function TheBuild({
           </m.div>
         </div>
 
-        {/* Image grid — renders only if galleryImages exist */}
+        {/* Image gallery — horizontal scroll for mobile screenshots */}
         {images.length > 0 && (
-          <div className={cn(
-            'grid gap-4 mt-16 md:mt-24',
-            images.length === 1 ? 'grid-cols-1' : images.length === 2 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 md:grid-cols-3',
-          )}>
-            {images.map((img, idx) => (
-              <m.div
-                key={idx}
-                initial={{ opacity: 0, scale: 1.03 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: idx * 0.1, ease: 'easeOut' }}
-                className="relative aspect-[4/3] overflow-hidden bg-black/5"
-              >
-                <Image src={img} alt={`${project.titleKey} ${idx + 1}`} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" quality={80} />
-              </m.div>
-            ))}
+          <div className="mt-16 md:mt-24 -mx-6 md:-mx-12 px-6 md:px-12 overflow-x-auto">
+            <div className="flex gap-4 md:gap-6 pb-4" style={{ minWidth: 'min-content' }}>
+              {images.map((img, idx) => (
+                <m.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: idx * 0.08, ease: 'easeOut' }}
+                  className="relative w-[220px] md:w-[260px] lg:w-[280px] shrink-0 rounded-2xl overflow-hidden bg-black/5 shadow-lg"
+                >
+                  <Image
+                    src={img}
+                    alt={`${project.titleKey} ${idx + 1}`}
+                    width={1290}
+                    height={2796}
+                    sizes="280px"
+                    className="w-full h-auto"
+                    quality={80}
+                  />
+                </m.div>
+              ))}
+            </div>
           </div>
         )}
 
