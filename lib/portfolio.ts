@@ -172,6 +172,8 @@ export const projects: Project[] = [
       '3o5p9iMXPbpY0OBacyDlafsB2OhJ8NIAFebXPinyukm6wZ9d', // hunt_checkout
       '3o5p9iMXPbpYLnQIlymHaT7wVJf6ZjcPQgz1etny2RBNXol9', // hunt_ticket_qr
     ],
+    scopeKey: 'projects.huntTickets.scope',
+    narrativeKey: 'projects.huntTickets.narrative',
     impactLineKey: 'projects.huntTickets.impactLine',
     problemKey: 'projects.huntTickets.problem',
     solutionKey: 'projects.huntTickets.solution',

@@ -15,73 +15,58 @@ interface CaseStudyPageProps {
   locale: string;
 }
 
-// ── Page Composition — 6 sections ──
+// ── Page Composition — 8 sections ──
 
 export function CaseStudyPage({ project, nextProject, locale }: CaseStudyPageProps) {
   const t = useTranslations('caseStudy');
   const tP = useTranslations('portfolio');
 
   const heroBg = project.galleryBg || (project.bgTheme === 'dark' ? '#121212' : '#EBF0F5');
-  const isDarkHero = project.galleryTheme === 'light' ? false : true;
+  const isDark = project.galleryTheme === 'light' ? false : true;
 
   return (
     <article>
-      {/* 1. Hero — title + image + metrics */}
-      <CaseHero
-        project={project}
-        isDark={isDarkHero}
-        heroBg={heroBg}
-        tP={tP}
-        locale={locale}
-        t={t}
-      />
+      {/* 1. Hero */}
+      <CaseHero project={project} isDark={isDark} heroBg={heroBg} tP={tP} locale={locale} t={t} />
 
-      {/* 2. The Challenge */}
-      {project.problemKey && (
+      {/* 2. Scope strip */}
+      {project.scopeKey && <ScopeStrip items={tP.raw(project.scopeKey) as string[]} isDark={isDark} heroBg={heroBg} />}
+
+      {/* 3. Metrics */}
+      {project.metrics && project.metrics.length > 0 && (
+        <MetricsStrip metrics={project.metrics} isDark={isDark} heroBg={heroBg} tP={tP} />
+      )}
+
+      {/* 4. Narrative */}
+      {(project.narrativeKey || project.problemKey) && (
         <NarrativeBlock
           label={t('sections.challenge')}
-          content={tP(project.problemKey)}
+          content={tP(project.narrativeKey || project.problemKey!)}
         />
       )}
 
-      {/* 3. The Build — approach + images + deliverables + tech */}
-      {project.solutionKey && (
-        <TheBuild
-          project={project}
-          tP={tP}
-          t={t}
-        />
-      )}
+      {/* 5. App showcase */}
+      <AppShowcase project={project} heroBg={heroBg} />
 
-      {/* 4. The Impact — result statement + live site */}
+      {/* 6. Deliverables + tech */}
+      <DeliverablesSection project={project} tP={tP} t={t} />
+
+      {/* 7. Impact quote */}
       {project.resultKey && (
-        <TheImpact
-          content={tP(project.resultKey)}
-          liveUrl={project.liveUrl}
-          t={t}
-        />
+        <ImpactQuote content={tP(project.resultKey)} liveUrl={project.liveUrl} t={t} />
       )}
 
-      {/* 5. Start a Project */}
+      {/* 8. CTA + Next case */}
       <BottomCTA t={t} locale={locale} />
-
-      {/* 6. Next Case */}
-      {nextProject && (
-        <NextProjectNav project={nextProject} tP={tP} t={t} locale={locale} />
-      )}
+      {nextProject && <NextProjectNav project={nextProject} tP={tP} t={t} locale={locale} />}
     </article>
   );
 }
 
-// ── 1. Hero ──
+// ── 1. Hero — title + full-bleed image (no metrics) ──
 
 function CaseHero({
-  project,
-  isDark,
-  heroBg,
-  tP,
-  locale,
-  t,
+  project, isDark, heroBg, tP, locale, t,
 }: {
   project: EnrichedProject;
   isDark: boolean;
@@ -97,7 +82,6 @@ function CaseHero({
   return (
     <section className="pt-32 md:pt-44 pb-0" style={{ backgroundColor: heroBg }}>
       <div className="max-w-6xl mx-auto px-6 md:px-12">
-        {/* Back link */}
         <m.div initial="initial" animate="animate" variants={fadeInUp} transition={transitions.fast}>
           <Link
             href={`/${locale}/#work`}
@@ -110,7 +94,6 @@ function CaseHero({
           </Link>
         </m.div>
 
-        {/* Category */}
         <m.span
           initial="initial" animate="animate" variants={fadeInUp}
           transition={{ ...transitions.smooth, delay: 0.05 }}
@@ -119,7 +102,6 @@ function CaseHero({
           {tP(`categories.${project.categoryKey}`)}
         </m.span>
 
-        {/* Title */}
         <m.h1
           initial="initial" animate="animate" variants={fadeInUp}
           transition={{ ...transitions.smooth, delay: 0.1 }}
@@ -128,7 +110,6 @@ function CaseHero({
           {project.titleKey}
         </m.h1>
 
-        {/* Impact line */}
         {project.impactLineKey && (
           <m.p
             initial="initial" animate="animate" variants={fadeInUp}
@@ -140,7 +121,6 @@ function CaseHero({
         )}
       </div>
 
-      {/* Hero image */}
       <m.div
         initial="initial" animate="animate" variants={fadeInUp}
         transition={{ ...transitions.smooth, delay: 0.25 }}
@@ -148,37 +128,9 @@ function CaseHero({
       >
         <HeroImage src={project.imageSrc} alt={project.titleKey} isDark={isDark} />
       </m.div>
-
-      {/* Metrics — inside the hero */}
-      {project.metrics && project.metrics.length > 0 && (
-        <div className="max-w-6xl mx-auto px-6 md:px-12 py-16 md:py-24">
-          <div className={cn(
-            'grid gap-12 md:gap-16',
-            project.metrics.length <= 2 ? 'grid-cols-2' : 'grid-cols-2 md:grid-cols-3',
-          )}>
-            {project.metrics.map((metric, idx) => (
-              <m.div
-                key={idx}
-                initial="initial" whileInView="animate" viewport={{ once: true }}
-                variants={fadeInUp}
-                transition={{ ...transitions.smooth, delay: idx * 0.1 }}
-              >
-                <span className={cn('font-mono text-4xl md:text-5xl lg:text-6xl font-bold block leading-none tracking-tight', text)}>
-                  {metric.value}
-                </span>
-                <span className={cn('text-xs md:text-sm mt-3 block font-mono tracking-wider uppercase', muted)}>
-                  {tP(metric.labelKey)}
-                </span>
-              </m.div>
-            ))}
-          </div>
-        </div>
-      )}
     </section>
   );
 }
-
-// ── Hero Image ──
 
 function HeroImage({ src, alt, isDark }: { src: string; alt: string; isDark: boolean }) {
   if (src) {
@@ -194,13 +146,6 @@ function HeroImage({ src, alt, isDark }: { src: string; alt: string; isDark: boo
       'aspect-[16/9] md:aspect-[21/9] relative overflow-hidden flex items-end p-8 md:p-16',
       isDark ? 'bg-[#0a0a0a]' : 'bg-[#e8e8e8]',
     )}>
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: 'linear-gradient(rgba(128,128,128,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(128,128,128,0.5) 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
-        }}
-      />
       <div className="relative z-10">
         <span className={cn('text-sm font-mono tracking-widest uppercase block mb-3', isDark ? 'text-white/10' : 'text-black/10')}>
           {alt}
@@ -211,13 +156,83 @@ function HeroImage({ src, alt, isDark }: { src: string; alt: string; isDark: boo
   );
 }
 
-// ── 2. The Challenge ──
+// ── 2. Scope strip — 3 bullets ──
+
+function ScopeStrip({ items, isDark, heroBg }: { items: string[]; isDark: boolean; heroBg: string }) {
+  const text = isDark ? 'text-white/70' : 'text-[#1A1A1A]/70';
+  const border = isDark ? 'border-white/10' : 'border-[#1A1A1A]/10';
+
+  return (
+    <section className="py-10 md:py-14 px-6 md:px-12" style={{ backgroundColor: heroBg }}>
+      <div className="max-w-6xl mx-auto">
+        <div className={cn('border-t pt-10 md:pt-14', border)}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
+            {items.map((item, idx) => (
+              <m.div
+                key={idx}
+                initial="initial" whileInView="animate" viewport={{ once: true }}
+                variants={fadeInUp}
+                transition={{ ...transitions.smooth, delay: idx * 0.08 }}
+              >
+                <span className={cn('text-sm md:text-base font-medium tracking-tight', text)}>
+                  {item}
+                </span>
+              </m.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── 3. Metrics strip — huge numbers ──
+
+function MetricsStrip({
+  metrics, isDark, heroBg, tP,
+}: {
+  metrics: { value: string; labelKey: string }[];
+  isDark: boolean;
+  heroBg: string;
+  tP: ReturnType<typeof useTranslations>;
+}) {
+  const text = isDark ? 'text-white' : 'text-[#1A1A1A]';
+  const muted = isDark ? 'text-white/25' : 'text-[#1A1A1A]/25';
+
+  return (
+    <section className="py-20 md:py-28 px-6 md:px-12" style={{ backgroundColor: heroBg }}>
+      <div className="max-w-6xl mx-auto">
+        <div className={cn(
+          'grid gap-12 md:gap-16',
+          metrics.length <= 2 ? 'grid-cols-2' : 'grid-cols-2 md:grid-cols-3',
+        )}>
+          {metrics.map((metric, idx) => (
+            <m.div
+              key={idx}
+              initial="initial" whileInView="animate" viewport={{ once: true }}
+              variants={fadeInUp}
+              transition={{ ...transitions.smooth, delay: idx * 0.1 }}
+            >
+              <span className={cn('font-mono text-6xl md:text-7xl lg:text-8xl font-bold block leading-none tracking-tighter', text)}>
+                {metric.value}
+              </span>
+              <span className={cn('text-xs md:text-sm mt-4 block font-mono tracking-wider uppercase', muted)}>
+                {tP(metric.labelKey)}
+              </span>
+            </m.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── 4. Narrative — merged challenge + approach ──
 
 function NarrativeBlock({ label, content }: { label: string; content: string }) {
   return (
     <section className="py-20 md:py-32 px-6 md:px-12 bg-white">
       <div className="max-w-6xl mx-auto">
-        <div className="border-t border-black/8 mb-12 md:mb-16" />
         <div className="md:grid md:grid-cols-12 md:gap-8">
           <m.div
             initial="initial" whileInView="animate" viewport={{ once: true, amount: 0.3 }}
@@ -243,12 +258,80 @@ function NarrativeBlock({ label, content }: { label: string; content: string }) 
   );
 }
 
-// ── 3. The Build — approach + image grid + deliverables + architecture ──
+// ── 5. App showcase — editorial phone grid ──
 
-function TheBuild({
-  project,
-  tP,
-  t,
+function AppShowcase({ project, heroBg }: { project: EnrichedProject; heroBg: string }) {
+  const images = (project.galleryImages || [])
+    .map((img) => utAssetUrl(img) || img)
+    .filter(Boolean);
+
+  if (images.length === 0) return null;
+
+  const splitAt = Math.ceil(images.length / 2);
+  const row1 = images.slice(0, splitAt);
+  const row2 = images.slice(splitAt);
+
+  return (
+    <section className="py-16 md:py-24 px-6 md:px-12" style={{ backgroundColor: heroBg }}>
+      <div className="max-w-6xl mx-auto space-y-8 md:space-y-12">
+        {/* Row 1 */}
+        <div className="flex justify-center gap-4 md:gap-6 lg:gap-8">
+          {row1.map((img, idx) => (
+            <m.div
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: idx * 0.1, ease: 'easeOut' }}
+              className="w-[180px] md:w-[220px] lg:w-[260px] shrink-0 rounded-2xl overflow-hidden shadow-2xl"
+            >
+              <Image
+                src={img}
+                alt={`${project.titleKey} ${idx + 1}`}
+                width={1290}
+                height={2796}
+                sizes="260px"
+                className="w-full h-auto"
+                quality={80}
+              />
+            </m.div>
+          ))}
+        </div>
+
+        {/* Row 2 */}
+        {row2.length > 0 && (
+          <div className="flex justify-center gap-4 md:gap-6 lg:gap-8">
+            {row2.map((img, idx) => (
+              <m.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: (idx + splitAt) * 0.1, ease: 'easeOut' }}
+                className="w-[180px] md:w-[220px] lg:w-[260px] shrink-0 rounded-2xl overflow-hidden shadow-2xl"
+              >
+                <Image
+                  src={img}
+                  alt={`${project.titleKey} ${idx + splitAt + 1}`}
+                  width={1290}
+                  height={2796}
+                  sizes="260px"
+                  className="w-full h-auto"
+                  quality={80}
+                />
+              </m.div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+// ── 6. Deliverables + tech stack ──
+
+function DeliverablesSection({
+  project, tP, t,
 }: {
   project: EnrichedProject;
   tP: ReturnType<typeof useTranslations>;
@@ -258,70 +341,15 @@ function TheBuild({
     ? (tP.raw(project.deliverablesKey) as string[])
     : [];
 
-  const images = (project.galleryImages || [])
-    .map((img) => utAssetUrl(img) || img)
-    .filter(Boolean);
+  if (deliverables.length === 0 && project.tags.length === 0) return null;
 
   return (
     <section className="bg-surface-light-1 py-20 md:py-32 px-6 md:px-12">
       <div className="max-w-6xl mx-auto">
-        {/* Approach narrative */}
-        <div className="border-t border-black/8 mb-12 md:mb-16" />
-        <div className="md:grid md:grid-cols-12 md:gap-8">
-          <m.div
-            initial="initial" whileInView="animate" viewport={{ once: true, amount: 0.3 }}
-            variants={fadeInUp} transition={transitions.smooth}
-            className="md:col-span-4 mb-8 md:mb-0"
-          >
-            <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-black/30 block">
-              {t('sections.build')}
-            </span>
-          </m.div>
-          <m.div
-            initial="initial" whileInView="animate" viewport={{ once: true, amount: 0.3 }}
-            variants={fadeInUp} transition={{ ...transitions.smooth, delay: 0.1 }}
-            className="md:col-span-8"
-          >
-            <p className="text-xl md:text-2xl lg:text-3xl leading-[1.4] text-black/75 font-light">
-              {tP(project.solutionKey!)}
-            </p>
-          </m.div>
-        </div>
-
-        {/* Image gallery — horizontal scroll for mobile screenshots */}
-        {images.length > 0 && (
-          <div className="mt-16 md:mt-24 -mx-6 md:-mx-12 px-6 md:px-12 overflow-x-auto">
-            <div className="flex gap-4 md:gap-6 pb-4" style={{ minWidth: 'min-content' }}>
-              {images.map((img, idx) => (
-                <m.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: idx * 0.08, ease: 'easeOut' }}
-                  className="relative w-[220px] md:w-[260px] lg:w-[280px] shrink-0 rounded-2xl overflow-hidden bg-black/5 shadow-lg"
-                >
-                  <Image
-                    src={img}
-                    alt={`${project.titleKey} ${idx + 1}`}
-                    width={1290}
-                    height={2796}
-                    sizes="280px"
-                    className="w-full h-auto"
-                    quality={80}
-                  />
-                </m.div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Deliverables — compact grid */}
         {deliverables.length > 0 && (
           <m.div
             initial="initial" whileInView="animate" viewport={{ once: true }}
-            variants={fadeInUp} transition={{ ...transitions.smooth, delay: 0.15 }}
-            className="mt-16 md:mt-24"
+            variants={fadeInUp} transition={transitions.smooth}
           >
             <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-black/30 block mb-6">
               {t('sections.deliverables')}
@@ -336,12 +364,11 @@ function TheBuild({
           </m.div>
         )}
 
-        {/* Architecture — tech stack */}
         {project.tags.length > 0 && (
           <m.div
             initial="initial" whileInView="animate" viewport={{ once: true }}
-            variants={fadeInUp} transition={{ ...transitions.smooth, delay: 0.2 }}
-            className="mt-12 md:mt-16"
+            variants={fadeInUp} transition={{ ...transitions.smooth, delay: 0.1 }}
+            className={deliverables.length > 0 ? 'mt-12 md:mt-16' : ''}
           >
             <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-black/30 block mb-4">
               {t('sections.architecture')}
@@ -360,12 +387,10 @@ function TheBuild({
   );
 }
 
-// ── 4. The Impact — result + live site ──
+// ── 7. Impact quote ──
 
-function TheImpact({
-  content,
-  liveUrl,
-  t,
+function ImpactQuote({
+  content, liveUrl, t,
 }: {
   content: string;
   liveUrl?: string;
@@ -380,9 +405,6 @@ function TheImpact({
           initial="initial" whileInView="animate" viewport={{ once: true }}
           variants={fadeInUp} transition={transitions.smooth}
         >
-          <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-white/25 block mb-10 md:mb-14">
-            {t('sections.impact')}
-          </span>
           <p className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-[1.2] font-nostalgic tracking-tight text-white/90">
             {content}
           </p>
@@ -403,7 +425,7 @@ function TheImpact({
   );
 }
 
-// ── 5. Start a Project ──
+// ── 8a. CTA ──
 
 function BottomCTA({ t, locale }: { t: ReturnType<typeof useTranslations>; locale: string }) {
   return (
@@ -439,13 +461,10 @@ function BottomCTA({ t, locale }: { t: ReturnType<typeof useTranslations>; local
   );
 }
 
-// ── 6. Next Case ──
+// ── 8b. Next case ──
 
 function NextProjectNav({
-  project,
-  tP,
-  t,
-  locale,
+  project, tP, t, locale,
 }: {
   project: EnrichedProject;
   tP: ReturnType<typeof useTranslations>;

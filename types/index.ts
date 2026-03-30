@@ -164,6 +164,8 @@ export type Project = {
   metrics?: ProjectMetric[];
 
   // Narrative (detail page depth)
+  scopeKey?: string;
+  narrativeKey?: string;
   problemKey?: string;
   solutionKey?: string;
   resultKey?: string;

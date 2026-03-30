@@ -445,10 +445,16 @@
       },
       "huntTickets": {
         "description": "App de boletería para eventos. 30K+ tickets procesados, 4.3★ en App Store, 5K+ descargas en el primer año.",
-        "impactLine": "Boletería móvil para la industria de eventos en Colombia. 30K+ tickets en el primer año.",
+        "impactLine": "Digitalizando la vida nocturna de Colombia, un ticket a la vez.",
+        "scope": [
+          "Producto Completo — Diseño + Desarrollo",
+          "React Native — iOS + Android",
+          "De Cero a 30K+ Tickets"
+        ],
+        "narrative": "La vida nocturna en Colombia no tenía boletería digital. Los compradores pagaban en efectivo o hacían filas. Los organizadores manejaban sus eventos a ciegas — sin visibilidad de inventario, sin validación de entrada, sin datos de asistencia. Diseñamos y construimos Hunt desde cero: gestión de asientos en tiempo real, validación por QR, y procesamiento de pagos diseñado para picos de alta demanda.",
         "problem": "La industria de eventos en Colombia no tenía infraestructura de boletería móvil confiable. Los compradores pagaban en efectivo o transferencia bancaria. Los organizadores no tenían visibilidad de inventario en tiempo real, ni validación digital, ni datos sobre quién asistía a sus eventos.",
         "solution": "Construimos una app nativa desde cero — inventario de asientos en tiempo real, validación de entrada por QR, y procesamiento de pagos integrado con métodos locales e internacionales. El sistema fue diseñado para soportar picos de alta concurrencia sin fallar bajo carga.",
-        "result": "30K+ tickets vendidos. 4.3★ en App Store. 5K+ descargas en el primer año. Hunt se convirtió en el sistema de boletería por defecto de múltiples venues en Colombia.",
+        "result": "Hunt se convirtió en el sistema de boletería por defecto de múltiples venues en Colombia.",
         "deliverables": [
           "App móvil React Native (iOS + Android)",
           "Inventario y gestión de asientos en tiempo real",
