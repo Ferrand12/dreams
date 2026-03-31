@@ -164,6 +164,7 @@ export const projects: Project[] = [
     editorialStateOverride: 'published',
     detailPageSlug: 'hunt-tickets',
     heroImage: 'hunt_mockup.png',
+    heroVideoKey: '3o5p9iMXPbpYS48jquv5tWKfSXqsNhkpGnx6dzV3Z8A1MaL2', // hunt_app_demo.mp4
     mockupUrl: 'https://eeyjhkhrdoouapuilwep.supabase.co/storage/v1/object/public/content/hunt_mockup.png',
     galleryImages: [
       '3o5p9iMXPbpYdi8PNuU1BmI9pOrGgnwTEfkuNZScWhAKX8R4', // hunt_home

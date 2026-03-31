@@ -15,29 +15,28 @@ interface CaseStudyPageProps {
   locale: string;
 }
 
-// ── Page Composition — 8 sections ──
+/* ────────────────────────────────────────────────────────
+   Page Composition — editorial dark immersive
+   ──────────────────────────────────────────────────────── */
 
 export function CaseStudyPage({ project, nextProject, locale }: CaseStudyPageProps) {
   const t = useTranslations('caseStudy');
   const tP = useTranslations('portfolio');
 
   const heroBg = project.galleryBg || (project.bgTheme === 'dark' ? '#121212' : '#EBF0F5');
-  const isDark = project.galleryTheme === 'light' ? false : true;
 
   return (
     <article>
-      {/* 1. Hero */}
-      <CaseHero project={project} isDark={isDark} heroBg={heroBg} tP={tP} locale={locale} t={t} />
+      <CaseHero project={project} heroBg={heroBg} tP={tP} locale={locale} t={t} />
 
-      {/* 2. Scope strip */}
-      {project.scopeKey && <ScopeStrip items={tP.raw(project.scopeKey) as string[]} isDark={isDark} heroBg={heroBg} />}
-
-      {/* 3. Metrics */}
-      {project.metrics && project.metrics.length > 0 && (
-        <MetricsStrip metrics={project.metrics} isDark={isDark} heroBg={heroBg} tP={tP} />
+      {project.scopeKey && (
+        <ScopeStrip items={tP.raw(project.scopeKey) as string[]} heroBg={heroBg} />
       )}
 
-      {/* 4. Narrative */}
+      {project.metrics && project.metrics.length > 0 && (
+        <MetricsStrip metrics={project.metrics} heroBg={heroBg} tP={tP} />
+      )}
+
       {(project.narrativeKey || project.problemKey) && (
         <NarrativeBlock
           label={t('sections.challenge')}
@@ -45,50 +44,43 @@ export function CaseStudyPage({ project, nextProject, locale }: CaseStudyPagePro
         />
       )}
 
-      {/* 5. App showcase */}
-      <AppShowcase project={project} heroBg={heroBg} />
+      <AppShowcase project={project} />
 
-      {/* 6. Deliverables + tech */}
       <DeliverablesSection project={project} tP={tP} t={t} />
 
-      {/* 7. Impact quote */}
       {project.resultKey && (
         <ImpactQuote content={tP(project.resultKey)} liveUrl={project.liveUrl} t={t} />
       )}
 
-      {/* 8. CTA + Next case */}
       <BottomCTA t={t} locale={locale} />
       {nextProject && <NextProjectNav project={nextProject} tP={tP} t={t} locale={locale} />}
     </article>
   );
 }
 
-// ── 1. Hero — title + full-bleed image (no metrics) ──
+/* ────────────────────────────────────────────────────────
+   1. Hero — video or image, full-viewport dark
+   ──────────────────────────────────────────────────────── */
 
 function CaseHero({
-  project, isDark, heroBg, tP, locale, t,
+  project, heroBg, tP, locale, t,
 }: {
   project: EnrichedProject;
-  isDark: boolean;
   heroBg: string;
   tP: ReturnType<typeof useTranslations>;
   locale: string;
   t: ReturnType<typeof useTranslations>;
 }) {
-  const text = isDark ? 'text-white' : 'text-[#1A1A1A]';
-  const muted = isDark ? 'text-white/30' : 'text-[#1A1A1A]/30';
-  const secondary = isDark ? 'text-white/50' : 'text-[#1A1A1A]/50';
+  const videoSrc = project.heroVideoKey ? utAssetUrl(project.heroVideoKey) : null;
 
   return (
-    <section className="pt-32 md:pt-44 pb-0" style={{ backgroundColor: heroBg }}>
-      <div className="max-w-6xl mx-auto px-6 md:px-12">
+    <section style={{ backgroundColor: heroBg }}>
+      {/* Title block */}
+      <div className="pt-32 md:pt-44 max-w-6xl mx-auto px-6 md:px-12">
         <m.div initial="initial" animate="animate" variants={fadeInUp} transition={transitions.fast}>
           <Link
             href={`/${locale}/#work`}
-            className={cn(
-              'text-[11px] font-mono tracking-[0.2em] uppercase inline-block mb-16 md:mb-20 transition-opacity hover:opacity-100',
-              isDark ? 'text-white/25 hover:text-white/50' : 'text-[#1A1A1A]/25 hover:text-[#1A1A1A]/50',
-            )}
+            className="text-[11px] font-mono tracking-[0.2em] uppercase inline-block mb-16 md:mb-20 transition-opacity text-white/25 hover:text-white/50"
           >
             {t('nav.backToWork')}
           </Link>
@@ -97,7 +89,7 @@ function CaseHero({
         <m.span
           initial="initial" animate="animate" variants={fadeInUp}
           transition={{ ...transitions.smooth, delay: 0.05 }}
-          className={cn('text-[11px] font-mono tracking-[0.2em] uppercase block mb-6', muted)}
+          className="text-[11px] font-mono tracking-[0.2em] uppercase block mb-6 text-white/30"
         >
           {tP(`categories.${project.categoryKey}`)}
         </m.span>
@@ -105,7 +97,7 @@ function CaseHero({
         <m.h1
           initial="initial" animate="animate" variants={fadeInUp}
           transition={{ ...transitions.smooth, delay: 0.1 }}
-          className={cn('text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-nostalgic leading-[0.95] tracking-tighter', text)}
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-nostalgic leading-[0.95] tracking-tighter text-white"
         >
           {project.titleKey}
         </m.h1>
@@ -114,25 +106,41 @@ function CaseHero({
           <m.p
             initial="initial" animate="animate" variants={fadeInUp}
             transition={{ ...transitions.smooth, delay: 0.15 }}
-            className={cn('text-lg md:text-xl lg:text-2xl leading-relaxed mt-8 md:mt-10 max-w-2xl font-light', secondary)}
+            className="text-lg md:text-xl lg:text-2xl leading-relaxed mt-8 md:mt-10 max-w-2xl font-light text-white/50"
           >
             {tP(project.impactLineKey)}
           </m.p>
         )}
       </div>
 
+      {/* Hero media — video or image */}
       <m.div
         initial="initial" animate="animate" variants={fadeInUp}
         transition={{ ...transitions.smooth, delay: 0.25 }}
         className="mt-16 md:mt-24"
       >
-        <HeroImage src={project.imageSrc} alt={project.titleKey} isDark={isDark} />
+        {videoSrc ? (
+          <div className="relative w-full overflow-hidden aspect-[16/9] md:aspect-[21/9] bg-black">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              poster={project.imageSrc || undefined}
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src={videoSrc} type="video/mp4" />
+            </video>
+          </div>
+        ) : (
+          <HeroImage src={project.imageSrc} alt={project.titleKey} />
+        )}
       </m.div>
     </section>
   );
 }
 
-function HeroImage({ src, alt, isDark }: { src: string; alt: string; isDark: boolean }) {
+function HeroImage({ src, alt }: { src: string; alt: string }) {
   if (src) {
     return (
       <div className="aspect-[16/9] md:aspect-[21/9] relative overflow-hidden w-full">
@@ -142,39 +150,37 @@ function HeroImage({ src, alt, isDark }: { src: string; alt: string; isDark: boo
   }
 
   return (
-    <div className={cn(
-      'aspect-[16/9] md:aspect-[21/9] relative overflow-hidden flex items-end p-8 md:p-16',
-      isDark ? 'bg-[#0a0a0a]' : 'bg-[#e8e8e8]',
-    )}>
+    <div className="aspect-[16/9] md:aspect-[21/9] relative overflow-hidden flex items-end p-8 md:p-16 bg-[#0a0a0a]">
       <div className="relative z-10">
-        <span className={cn('text-sm font-mono tracking-widest uppercase block mb-3', isDark ? 'text-white/10' : 'text-black/10')}>
-          {alt}
-        </span>
-        <div className={cn('w-16 h-px', isDark ? 'bg-white/10' : 'bg-black/10')} />
+        <span className="text-sm font-mono tracking-widest uppercase block mb-3 text-white/10">{alt}</span>
+        <div className="w-16 h-px bg-white/10" />
       </div>
     </div>
   );
 }
 
-// ── 2. Scope strip — 3 bullets ──
+/* ────────────────────────────────────────────────────────
+   2. Scope strip — numbered editorial bullets
+   ──────────────────────────────────────────────────────── */
 
-function ScopeStrip({ items, isDark, heroBg }: { items: string[]; isDark: boolean; heroBg: string }) {
-  const text = isDark ? 'text-white/70' : 'text-[#1A1A1A]/70';
-  const border = isDark ? 'border-white/10' : 'border-[#1A1A1A]/10';
-
+function ScopeStrip({ items, heroBg }: { items: string[]; heroBg: string }) {
   return (
-    <section className="py-10 md:py-14 px-6 md:px-12" style={{ backgroundColor: heroBg }}>
+    <section className="py-12 md:py-16 px-6 md:px-12" style={{ backgroundColor: heroBg }}>
       <div className="max-w-6xl mx-auto">
-        <div className={cn('border-t pt-10 md:pt-14', border)}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
+        <div className="border-t border-white/10 pt-12 md:pt-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             {items.map((item, idx) => (
               <m.div
                 key={idx}
                 initial="initial" whileInView="animate" viewport={{ once: true }}
                 variants={fadeInUp}
                 transition={{ ...transitions.smooth, delay: idx * 0.08 }}
+                className="flex items-baseline gap-4"
               >
-                <span className={cn('text-sm md:text-base font-medium tracking-tight', text)}>
+                <span className="text-xs font-mono text-white/20 tabular-nums">
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
+                <span className="text-sm md:text-base font-medium tracking-tight text-white/70">
                   {item}
                 </span>
               </m.div>
@@ -186,21 +192,19 @@ function ScopeStrip({ items, isDark, heroBg }: { items: string[]; isDark: boolea
   );
 }
 
-// ── 3. Metrics strip — huge numbers ──
+/* ────────────────────────────────────────────────────────
+   3. Metrics — huge typographic numbers
+   ──────────────────────────────────────────────────────── */
 
 function MetricsStrip({
-  metrics, isDark, heroBg, tP,
+  metrics, heroBg, tP,
 }: {
   metrics: { value: string; labelKey: string }[];
-  isDark: boolean;
   heroBg: string;
   tP: ReturnType<typeof useTranslations>;
 }) {
-  const text = isDark ? 'text-white' : 'text-[#1A1A1A]';
-  const muted = isDark ? 'text-white/25' : 'text-[#1A1A1A]/25';
-
   return (
-    <section className="py-20 md:py-28 px-6 md:px-12" style={{ backgroundColor: heroBg }}>
+    <section className="py-20 md:py-32 px-6 md:px-12" style={{ backgroundColor: heroBg }}>
       <div className="max-w-6xl mx-auto">
         <div className={cn(
           'grid gap-12 md:gap-16',
@@ -213,10 +217,10 @@ function MetricsStrip({
               variants={fadeInUp}
               transition={{ ...transitions.smooth, delay: idx * 0.1 }}
             >
-              <span className={cn('font-mono text-6xl md:text-7xl lg:text-8xl font-bold block leading-none tracking-tighter', text)}>
+              <span className="font-mono text-6xl md:text-7xl lg:text-8xl font-bold block leading-none tracking-tighter text-white">
                 {metric.value}
               </span>
-              <span className={cn('text-xs md:text-sm mt-4 block font-mono tracking-wider uppercase', muted)}>
+              <span className="text-xs md:text-sm mt-4 block font-mono tracking-wider uppercase text-white/25">
                 {tP(metric.labelKey)}
               </span>
             </m.div>
@@ -227,11 +231,13 @@ function MetricsStrip({
   );
 }
 
-// ── 4. Narrative — merged challenge + approach ──
+/* ────────────────────────────────────────────────────────
+   4. Narrative — dark editorial paragraph
+   ──────────────────────────────────────────────────────── */
 
 function NarrativeBlock({ label, content }: { label: string; content: string }) {
   return (
-    <section className="py-20 md:py-32 px-6 md:px-12 bg-white">
+    <section className="py-24 md:py-40 px-6 md:px-12" style={{ backgroundColor: '#111' }}>
       <div className="max-w-6xl mx-auto">
         <div className="md:grid md:grid-cols-12 md:gap-8">
           <m.div
@@ -239,7 +245,7 @@ function NarrativeBlock({ label, content }: { label: string; content: string }) 
             variants={fadeInUp} transition={transitions.smooth}
             className="md:col-span-4 mb-8 md:mb-0"
           >
-            <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-black/30 block">
+            <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-white/25 block">
               {label}
             </span>
           </m.div>
@@ -248,7 +254,7 @@ function NarrativeBlock({ label, content }: { label: string; content: string }) 
             variants={fadeInUp} transition={{ ...transitions.smooth, delay: 0.1 }}
             className="md:col-span-8"
           >
-            <p className="text-xl md:text-2xl lg:text-3xl leading-[1.4] text-black/75 font-light">
+            <p className="text-xl md:text-2xl lg:text-3xl leading-[1.4] text-white/60 font-light">
               {content}
             </p>
           </m.div>
@@ -258,77 +264,101 @@ function NarrativeBlock({ label, content }: { label: string; content: string }) 
   );
 }
 
-// ── 5. App showcase — editorial phone grid ──
+/* ────────────────────────────────────────────────────────
+   5. App showcase — editorial asymmetric phone grid
+   Feature phone (hero, large, centered with glow) +
+   supporting phones (smaller, staggered grid)
+   ──────────────────────────────────────────────────────── */
 
-function AppShowcase({ project, heroBg }: { project: EnrichedProject; heroBg: string }) {
+function AppShowcase({ project }: { project: EnrichedProject }) {
   const images = (project.galleryImages || [])
     .map((img) => utAssetUrl(img) || img)
     .filter(Boolean);
 
   if (images.length === 0) return null;
 
-  const splitAt = Math.ceil(images.length / 2);
-  const row1 = images.slice(0, splitAt);
-  const row2 = images.slice(splitAt);
+  // First image = feature (large, hero), rest = supporting grid
+  const [feature, ...supporting] = images;
 
   return (
-    <section className="py-16 md:py-24 px-6 md:px-12" style={{ backgroundColor: heroBg }}>
-      <div className="max-w-6xl mx-auto space-y-8 md:space-y-12">
-        {/* Row 1 */}
-        <div className="flex justify-center gap-4 md:gap-6 lg:gap-8">
-          {row1.map((img, idx) => (
-            <m.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: idx * 0.1, ease: 'easeOut' }}
-              className="w-[180px] md:w-[220px] lg:w-[260px] shrink-0 rounded-2xl overflow-hidden shadow-2xl"
-            >
-              <Image
-                src={img}
-                alt={`${project.titleKey} ${idx + 1}`}
-                width={1290}
-                height={2796}
-                sizes="260px"
-                className="w-full h-auto"
-                quality={80}
-              />
-            </m.div>
-          ))}
+    <section className="py-28 md:py-44" style={{ backgroundColor: '#080808' }}>
+      {/* Feature phone — large, centered, ambient glow */}
+      <m.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="flex justify-center mb-20 md:mb-32 px-6"
+      >
+        <div className="relative">
+          {/* Ambient glow behind phone */}
+          <div
+            className="absolute -inset-12 md:-inset-20 rounded-full pointer-events-none"
+            style={{
+              background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, transparent 70%)',
+            }}
+          />
+          <div className="relative w-[260px] md:w-[320px] lg:w-[360px] rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-white/[0.08]">
+            <Image
+              src={feature}
+              alt={`${project.titleKey} — main screen`}
+              width={1290}
+              height={2796}
+              sizes="(max-width: 768px) 260px, (max-width: 1024px) 320px, 360px"
+              className="w-full h-auto"
+              quality={85}
+            />
+          </div>
         </div>
+      </m.div>
 
-        {/* Row 2 */}
-        {row2.length > 0 && (
-          <div className="flex justify-center gap-4 md:gap-6 lg:gap-8">
-            {row2.map((img, idx) => (
+      {/* Supporting phones — editorial grid with stagger */}
+      {supporting.length > 0 && (
+        <div className="max-w-5xl mx-auto px-6 md:px-12">
+          <div className={cn(
+            'grid gap-5 md:gap-8 justify-items-center',
+            supporting.length <= 2
+              ? 'grid-cols-2 max-w-md mx-auto'
+              : 'grid-cols-2 md:grid-cols-4',
+          )}>
+            {supporting.map((img, idx) => (
               <m.div
                 key={idx}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: (idx + splitAt) * 0.1, ease: 'easeOut' }}
-                className="w-[180px] md:w-[220px] lg:w-[260px] shrink-0 rounded-2xl overflow-hidden shadow-2xl"
+                transition={{ duration: 0.7, delay: 0.12 + idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full"
               >
-                <Image
-                  src={img}
-                  alt={`${project.titleKey} ${idx + splitAt + 1}`}
-                  width={1290}
-                  height={2796}
-                  sizes="260px"
-                  className="w-full h-auto"
-                  quality={80}
-                />
+                <div
+                  className={cn(
+                    'rounded-2xl md:rounded-[1.5rem] overflow-hidden shadow-xl ring-1 ring-white/[0.06]',
+                    // Stagger: alternate phones get a top margin offset (desktop only)
+                    idx % 2 === 1 ? 'md:mt-8' : 'md:mt-0',
+                  )}
+                >
+                  <Image
+                    src={img}
+                    alt={`${project.titleKey} screen ${idx + 2}`}
+                    width={1290}
+                    height={2796}
+                    sizes="(max-width: 768px) 160px, 200px"
+                    className="w-full h-auto"
+                    quality={80}
+                  />
+                </div>
               </m.div>
             ))}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 }
 
-// ── 6. Deliverables + tech stack ──
+/* ────────────────────────────────────────────────────────
+   6. Deliverables — dark, numbered, prominent
+   ──────────────────────────────────────────────────────── */
 
 function DeliverablesSection({
   project, tP, t,
@@ -344,20 +374,28 @@ function DeliverablesSection({
   if (deliverables.length === 0 && project.tags.length === 0) return null;
 
   return (
-    <section className="bg-surface-light-1 py-20 md:py-32 px-6 md:px-12">
+    <section className="py-24 md:py-40 px-6 md:px-12" style={{ backgroundColor: '#111' }}>
       <div className="max-w-6xl mx-auto">
         {deliverables.length > 0 && (
           <m.div
             initial="initial" whileInView="animate" viewport={{ once: true }}
             variants={fadeInUp} transition={transitions.smooth}
           >
-            <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-black/30 block mb-6">
+            <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-white/25 block mb-12 md:mb-16">
               {t('sections.deliverables')}
             </span>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
               {deliverables.map((item, idx) => (
-                <div key={idx} className="text-sm text-black/60 font-light py-2.5 border-b border-black/6">
-                  {item}
+                <div
+                  key={idx}
+                  className="flex items-baseline gap-6 py-5 md:py-6 border-b border-white/[0.06]"
+                >
+                  <span className="text-sm font-mono text-white/20 tabular-nums shrink-0">
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
+                  <span className="text-base md:text-lg lg:text-xl text-white/60 font-light">
+                    {item}
+                  </span>
                 </div>
               ))}
             </div>
@@ -368,14 +406,17 @@ function DeliverablesSection({
           <m.div
             initial="initial" whileInView="animate" viewport={{ once: true }}
             variants={fadeInUp} transition={{ ...transitions.smooth, delay: 0.1 }}
-            className={deliverables.length > 0 ? 'mt-12 md:mt-16' : ''}
+            className={deliverables.length > 0 ? 'mt-16 md:mt-24' : ''}
           >
-            <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-black/30 block mb-4">
+            <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-white/25 block mb-8">
               {t('sections.architecture')}
             </span>
-            <div className="flex flex-wrap gap-2.5">
+            <div className="flex flex-wrap gap-3">
               {project.tags.map((tag) => (
-                <span key={tag} className="text-xs font-mono tracking-wider text-black/35 px-3.5 py-1.5 border border-black/8">
+                <span
+                  key={tag}
+                  className="text-sm font-mono tracking-wider text-white/35 px-5 py-2.5 border border-white/[0.08]"
+                >
                   {tag}
                 </span>
               ))}
@@ -387,7 +428,9 @@ function DeliverablesSection({
   );
 }
 
-// ── 7. Impact quote ──
+/* ────────────────────────────────────────────────────────
+   7. Impact quote — full-width statement
+   ──────────────────────────────────────────────────────── */
 
 function ImpactQuote({
   content, liveUrl, t,
@@ -399,7 +442,7 @@ function ImpactQuote({
   const fullUrl = liveUrl ? (liveUrl.startsWith('http') ? liveUrl : `https://${liveUrl}`) : undefined;
 
   return (
-    <section className="bg-[#121212] text-white py-24 md:py-36 px-6 md:px-12">
+    <section className="py-28 md:py-44 px-6 md:px-12" style={{ backgroundColor: '#0A0A0A' }}>
       <div className="max-w-5xl mx-auto">
         <m.div
           initial="initial" whileInView="animate" viewport={{ once: true }}
@@ -425,16 +468,18 @@ function ImpactQuote({
   );
 }
 
-// ── 8a. CTA ──
+/* ────────────────────────────────────────────────────────
+   8a. CTA — earned after proof
+   ──────────────────────────────────────────────────────── */
 
 function BottomCTA({ t, locale }: { t: ReturnType<typeof useTranslations>; locale: string }) {
   return (
-    <section className="bg-[#0A0A0A] text-white py-24 md:py-36 px-6 md:px-12">
+    <section className="py-28 md:py-44 px-6 md:px-12" style={{ backgroundColor: '#080808' }}>
       <div className="max-w-3xl mx-auto text-center">
         <m.h2
           initial="initial" whileInView="animate" viewport={{ once: true }}
           variants={fadeInUp} transition={transitions.smooth}
-          className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-nostalgic tracking-tighter leading-[0.95]"
+          className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-nostalgic tracking-tighter leading-[0.95] text-white"
         >
           {t('cta.title')}
         </m.h2>
@@ -461,7 +506,9 @@ function BottomCTA({ t, locale }: { t: ReturnType<typeof useTranslations>; local
   );
 }
 
-// ── 8b. Next case ──
+/* ────────────────────────────────────────────────────────
+   8b. Next project — dark, consistent with editorial
+   ──────────────────────────────────────────────────────── */
 
 function NextProjectNav({
   project, tP, t, locale,
@@ -476,24 +523,24 @@ function NextProjectNav({
     : `/${locale}/#work`;
 
   return (
-    <section className="bg-surface-light-1 text-black border-t border-black/5">
+    <section className="border-t border-white/[0.06]" style={{ backgroundColor: '#111' }}>
       <Link href={href} className="group block py-20 md:py-28 px-6 md:px-12">
         <div className="max-w-6xl mx-auto">
           <m.div
             initial="initial" whileInView="animate" viewport={{ once: true }}
             variants={fadeInUp} transition={transitions.smooth}
           >
-            <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-black/25 block mb-8">
+            <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-white/25 block mb-8">
               {t('nav.nextProject')}
             </span>
-            <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-black/35 block mb-3">
+            <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-white/35 block mb-3">
               {tP(`categories.${project.categoryKey}`)}
             </span>
-            <h3 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nostalgic tracking-tighter leading-[0.95] transition-opacity duration-300 group-hover:opacity-50">
+            <h3 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-nostalgic tracking-tighter leading-[0.95] text-white transition-opacity duration-300 group-hover:opacity-50">
               {project.titleKey}
             </h3>
             {project.impactLineKey && (
-              <p className="text-sm md:text-base text-black/40 mt-4 max-w-xl font-light leading-relaxed">
+              <p className="text-sm md:text-base text-white/40 mt-4 max-w-xl font-light leading-relaxed">
                 {tP(project.impactLineKey)}
               </p>
             )}

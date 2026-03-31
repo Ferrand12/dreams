@@ -155,6 +155,7 @@ export type Project = {
 
   // Visual (progressive — add as assets become available)
   heroImage?: string;
+  heroVideoKey?: string;
   placeholderImage?: string;
   mockupUrl?: string;
   galleryImages?: string[];
